@@ -2963,8 +2963,8 @@ static void build_subroutines(BuildCtx *ctx)
   |  .endif
   |  .if ELFV2
   |   rlwinm r12, r12, 30, 22, 31
-  |   addisl TOCREG, TOCREG, extern .TOC.-.Lfunc_gep0@ha
-  |   addil TOCREG, TOCREG, extern .TOC.-.Lfunc_gep0@l
+  |   addisl TOCREG, TOCREG, extern .TOC.-lj_vm_ffi_callback@ha
+  |   addil TOCREG, TOCREG, extern .TOC.-lj_vm_ffi_callback@l
   |  .endif
   |  saveregs
   |  lwz CTSTATE, GL:r11->ctype_state
