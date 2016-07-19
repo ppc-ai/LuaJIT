@@ -3080,7 +3080,11 @@ static void build_subroutines(BuildCtx *ctx)
   |  .endif
   |  mr r14, TMP2
   |  la TMP1, CCSTATE->stack
+  |  .if GPR64
+  |   sldi CARG2, CARG2, 3
+  |  .else
   |   slwi CARG2, CARG2, 2
+  |  .endif
   |   blty >2
   |  .if ELFV2
   |    la TMP2, 96(sp)
