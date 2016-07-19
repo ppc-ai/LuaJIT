@@ -205,15 +205,15 @@ static void callback_mcode_init(global_State *g, uint32_t *page)
 }
 #elif LJ_TARGET_PPC
 #if LJ_ARCH_PPC_OPD
+register void *vm_toc __asm__("r2");
 static void callback_mcode_init(global_State *g, uint64_t *page)
 {
   uint64_t *p = page;
   void *target = (void *)lj_vm_ffi_callback;
-  static register void *toc __asm__("r2");
   MSize slot;
   for (slot = 0; slot < CALLBACK_MAX_SLOT; slot++) {
     *p++ = (uint64_t)target;
-    *p++ = (uint64_t)toc;
+    *p++ = (uint64_t)vm_toc;
     *p++ = (uint64_t)g | ((uint64_t)slot << 47);
   }
   lua_assert(p - page <= CALLBACK_MCODE_SIZE / 8);
