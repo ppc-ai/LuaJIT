@@ -33,12 +33,14 @@
 |.macro lpx, a, b, c; ldx a, b, c; .endmacro
 |.macro lp, a, b; ld a, b; .endmacro
 |.macro stp, a, b; std a, b; .endmacro
+|.macro stpx, a, b, c; stdx a, b, c; .endmacro
 |.define decode_OPP, decode_OP8
 |.define WORD_SIZE, 8
 |.else
 |.macro lpx, a, b, c; lwzx a, b, c; .endmacro
 |.macro lp, a, b; lwz a, b; .endmacro
 |.macro stp, a, b; stw a, b; .endmacro
+|.macro stpx, a, b, c; stwx a, b, c; .endmacro
 |.define decode_OPP, decode_OP4
 |.define WORD_SIZE, 4
 |.endif
