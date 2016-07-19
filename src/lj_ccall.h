@@ -89,7 +89,13 @@ typedef union FPRArg {
 #define CCALL_NARG_FPR		8
 #define CCALL_NRET_GPR		4	/* For complex double. */
 #define CCALL_NRET_FPR		1
+#if LJ_ARCH_PPC_ELFV2
+#define CCALL_SPS_EXTRA		14
+#elif LJ_ARCH_BITS == 64
+#define CCALL_SPS_EXTRA		16
+#else
 #define CCALL_SPS_EXTRA		4
+#endif
 #define CCALL_SPS_FREE		0
 
 typedef intptr_t GPRArg;

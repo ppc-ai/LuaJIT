@@ -131,6 +131,8 @@ static LJ_AINLINE uint32_t *exitstub_trace_addr_(uint32_t *p, uint32_t exitno)
 #define PPCF_C(r)	((r) << 6)
 #define PPCF_MB(n)	((n) << 6)
 #define PPCF_ME(n)	((n) << 1)
+#define PPCF_SH(n)	((((n) & 31) << (11+1)) | (((n) & 32) >> (5-1)))
+#define PPCF_M6(n)	((((n) & 31) << (5+1)) | (((n) & 32) << (11-5)))
 #define PPCF_Y		0x00200000
 #define PPCF_DOT	0x00000001
 

@@ -61,7 +61,23 @@ static MSize CALLBACK_OFS2SLOT(MSize ofs)
 
 #elif LJ_TARGET_PPC
 
+#if LJ_ARCH_PPC_OPD
+
+#define CALLBACK_SLOT2OFS(slot)		(CALLBACK_MCODE_HEAD + 24*(slot))
+#define CALLBACK_OFS2SLOT(ofs)		(((ofs)-CALLBACK_MCODE_HEAD)/24)
+#define CALLBACK_MAX_SLOT		(CALLBACK_OFS2SLOT(CALLBACK_MCODE_SIZE))
+
+#elif LJ_ARCH_PPC_ELFV2
+
+#define CALLBACK_SLOT2OFS(slot)		(4*(slot))
+#define CALLBACK_OFS2SLOT(ofs)		((ofs)/4)
+#define CALLBACK_MAX_SLOT		(CALLBACK_MCODE_SIZE/4 - 10)
+
+#else
+
 #define CALLBACK_MCODE_HEAD		24
+
+#endif
 
 #elif LJ_TARGET_MIPS32
 
@@ -188,23 +204,57 @@ static void callback_mcode_init(global_State *g, uint32_t *page)
   lua_assert(p - page <= CALLBACK_MCODE_SIZE);
 }
 #elif LJ_TARGET_PPC
+#if LJ_ARCH_PPC_OPD
+static void callback_mcode_init(global_State *g, uint64_t *page)
+{
+  uint64_t *p = page;
+  void *target = (void *)lj_vm_ffi_callback;
+  static register void *toc __asm__("r2");
+  MSize slot;
+  for (slot = 0; slot < CALLBACK_MAX_SLOT; slot++) {
+    *p++ = (uint64_t)target;
+    *p++ = (uint64_t)toc;
+    *p++ = (uint64_t)g | ((uint64_t)slot << 47);
+  }
+  lua_assert(p - page <= CALLBACK_MCODE_SIZE / 8);
+}
+#else
 static void callback_mcode_init(global_State *g, uint32_t *page)
 {
   uint32_t *p = page;
   void *target = (void *)lj_vm_ffi_callback;
   MSize slot;
+#if LJ_ARCH_PPC_ELFV2
+  // Needs to be in sync with lj_vm_ffi_callback.
+  lua_assert(CALLBACK_MCODE_SIZE == 4096);
+  for (slot = 0; slot < CALLBACK_MAX_SLOT; slot++) {
+    *p = PPCI_B | (((page+CALLBACK_MAX_SLOT-p) & 0x00ffffffu) << 2);
+    p++;
+  }
+  *p++ = PPCI_LI | PPCF_T(RID_R2) | ((((intptr_t)target) >> 32) & 0xffff);
+  *p++ = PPCI_LI | PPCF_T(RID_R11) | ((((intptr_t)g) >> 32) & 0xffff);
+  *p++ = PPCI_RLDICR | PPCF_T(RID_R2) | PPCF_A(RID_R2) | PPCF_SH(32) | PPCF_M6(63-32);  /* sldi */
+  *p++ = PPCI_RLDICR | PPCF_T(RID_R11) | PPCF_A(RID_R11) | PPCF_SH(32) | PPCF_M6(63-32);  /* sldi */
+  *p++ = PPCI_ORIS | PPCF_A(RID_R2) | PPCF_T(RID_R2) | ((((intptr_t)target) >> 16) & 0xffff);
+  *p++ = PPCI_ORIS | PPCF_A(RID_R11) | PPCF_T(RID_R11) | ((((intptr_t)g) >> 16) & 0xffff);
+  *p++ = PPCI_ORI | PPCF_A(RID_R2) | PPCF_T(RID_R2) | (((intptr_t)target) & 0xffff);
+  *p++ = PPCI_ORI | PPCF_A(RID_R11) | PPCF_T(RID_R11) | (((intptr_t)g) & 0xffff);
+  *p++ = PPCI_MTCTR | PPCF_T(RID_R2);
+  *p++ = PPCI_BCTR;
+#else
   *p++ = PPCI_LIS | PPCF_T(RID_TMP) | (u32ptr(target) >> 16);
-  *p++ = PPCI_LIS | PPCF_T(RID_R12) | (u32ptr(g) >> 16);
+  *p++ = PPCI_LIS | PPCF_T(RID_R11) | (u32ptr(g) >> 16);
   *p++ = PPCI_ORI | PPCF_A(RID_TMP)|PPCF_T(RID_TMP) | (u32ptr(target) & 0xffff);
-  *p++ = PPCI_ORI | PPCF_A(RID_R12)|PPCF_T(RID_R12) | (u32ptr(g) & 0xffff);
+  *p++ = PPCI_ORI | PPCF_A(RID_R11)|PPCF_T(RID_R11) | (u32ptr(g) & 0xffff);
   *p++ = PPCI_MTCTR | PPCF_T(RID_TMP);
   *p++ = PPCI_BCTR;
   for (slot = 0; slot < CALLBACK_MAX_SLOT; slot++) {
-    *p++ = PPCI_LI | PPCF_T(RID_R11) | slot;
+    *p++ = PPCI_LI | PPCF_T(RID_R12) | slot;
     *p = PPCI_B | (((page-p) & 0x00ffffffu) << 2);
     p++;
   }
-  lua_assert(p - page <= CALLBACK_MCODE_SIZE);
+#endif
+  lua_assert(p - page <= CALLBACK_MCODE_SIZE / 4);
 }
 #elif LJ_TARGET_MIPS
 static void callback_mcode_init(global_State *g, uint32_t *page)
