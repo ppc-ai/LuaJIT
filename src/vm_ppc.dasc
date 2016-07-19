@@ -2957,11 +2957,15 @@ static void build_subroutines(BuildCtx *ctx)
   |->vm_ffi_callback:
   |.if FFI
   |.type CTSTATE, CTState, PC
-  |  .opd rldicl r12, r11, 17, 47
-  |  .opd rldicl r11, r11, 0, 17
-  |  .elfv2 rlwinm r12, r12, 30, 22, 31
-  |  .elfv2 addisl TOC_REG, TOC_REG, extern .TOC.-.Lfunc_gep0@ha
-  |  .elfv2 addil TOC_REG, TOC_REG, extern .TOC.-.Lfunc_gep0@l
+  |  .if OPD
+  |   rldicl r12, r11, 17, 47
+  |   rldicl r11, r11, 0, 17
+  |  .endif
+  |  .if ELFV2
+  |   rlwinm r12, r12, 30, 22, 31
+  |   addisl TOC_REG, TOC_REG, extern .TOC.-.Lfunc_gep0@ha
+  |   addil TOC_REG, TOC_REG, extern .TOC.-.Lfunc_gep0@l
+  |  .endif
   |  saveregs
   |  lwz CTSTATE, GL:r11->ctype_state
   |   addi DISPATCH, r11, GG_G2DISP
