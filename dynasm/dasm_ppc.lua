@@ -844,6 +844,9 @@ map_op = {
   srdi_3 =	op_alias("rldicl_4", function(p)
     p[4] = p[3]; p[3] = "64-("..p[3]..")"
   end),
+  ["srdi._3"] =	op_alias("rldicl._4", function(p)
+    p[4] = p[3]; p[3] = "64-("..p[3]..")"
+  end),
   clrldi_3 =	op_alias("rldicl_4", function(p)
     p[4] = p[3]; p[3] = "0"
   end),

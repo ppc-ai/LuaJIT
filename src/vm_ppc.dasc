@@ -2928,10 +2928,18 @@ static void build_subroutines(BuildCtx *ctx)
   |->vm_cachesync:
   |.if JIT or FFI
   |  // Compute start of first cache line and number of cache lines.
+  |  .if GPR64
+  |  rldicr CARG1, CARG1, 0, 58
+  |  .else
   |  rlwinm CARG1, CARG1, 0, 0, 26
+  |  .endif
   |  sub CARG2, CARG2, CARG1
   |  addi CARG2, CARG2, 31
+  |  .if GPR64
+  |  srdi. CARG2, CARG2, 5
+  |  .else
   |  rlwinm. CARG2, CARG2, 27, 5, 31
+  |  .endif
   |  beqlr
   |  mtctr CARG2
   |  mr CARG3, CARG1
