@@ -1065,6 +1065,15 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
 	*(int32_t *)dp = d->size == 1 ? (int32_t)*(int8_t *)dp :
 					(int32_t)*(int16_t *)dp;
     }
+#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
+    if ((ctype_isinteger_or_bool(d->info) || ctype_isenum(d->info))
+	&& d->size <= 4) {
+      if (d->info & CTF_UNSIGNED)
+        *(uint64_t *)dp = (uint64_t)*(uint32_t *)dp;
+      else
+        *(int64_t *)dp = (int64_t)*(int32_t *)dp;
+    }
+#endif
 #if LJ_TARGET_MIPS64
     if ((ctype_isinteger_or_bool(d->info) || ctype_isenum(d->info) ||
 	 (isfp && nsp == 0)) && d->size <= 4) {
