@@ -688,6 +688,15 @@ static void callback_conv_result(CTState *cts, lua_State *L, TValue *o)
 	*(int32_t *)dp = ctr->size == 1 ? (int32_t)*(int8_t *)dp :
 					  (int32_t)*(int16_t *)dp;
     }
+#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
+    if (ctr->size <= 4 &&
+	(ctype_isinteger_or_bool(ctr->info) || ctype_isenum(ctr->info))) {
+      if (ctr->info & CTF_UNSIGNED)
+        *(uint64_t *)dp = (uint64_t)*(uint32_t *)dp;
+      else
+        *(int64_t *)dp = (int64_t)*(int32_t *)dp;
+    }
+#endif
 #if LJ_TARGET_MIPS64
     /* Always sign-extend results to 64 bits. Even a soft-fp 'float'. */
     if (ctr->size <= 4 &&
