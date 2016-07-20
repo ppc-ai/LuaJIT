@@ -390,7 +390,10 @@
       if (nfpr + 1 <= CCALL_NARG_FPR) { \
        dp = &cc->fpr[nfpr]; \
        nfpr += 1; \
-       ngpr += 1;  /* align GPRs */ \
+       if (ngpr + 1 <= maxgpr) \
+         ngpr += 1;  /* align GPRs */ \
+       else \
+         nsp += 1; \
        d = ctype_get(cts, CTID_DOUBLE);  /* FPRs always hold doubles. */ \
        goto done; \
       } \
