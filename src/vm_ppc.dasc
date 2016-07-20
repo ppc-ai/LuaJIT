@@ -2994,6 +2994,13 @@ static void build_subroutines(BuildCtx *ctx)
   |   stfd f7, CTSTATE->cb.fpr[6]
   |  stp r10, CTSTATE->cb.gpr[7]
   |   stfd f8, CTSTATE->cb.fpr[7]
+  |  .if GPR64
+  |   stfd f9, CTSTATE->cb.fpr[8]
+  |   stfd f10, CTSTATE->cb.fpr[9]
+  |   stfd f11, CTSTATE->cb.fpr[10]
+  |   stfd f12, CTSTATE->cb.fpr[11]
+  |   stfd f13, CTSTATE->cb.fpr[12]
+  |  .endif
   |  .if ELFV2
   |  addi TMP0, sp, CFRAME_SPACE+96
   |  .elif GPR64
@@ -3108,6 +3115,13 @@ static void build_subroutines(BuildCtx *ctx)
   |  lfd f6, CCSTATE->fpr[5]
   |  lfd f7, CCSTATE->fpr[6]
   |  lfd f8, CCSTATE->fpr[7]
+  |  .if GPR64
+  |  lfd f9, CCSTATE->fpr[8]
+  |  lfd f10, CCSTATE->fpr[9]
+  |  lfd f11, CCSTATE->fpr[10]
+  |  lfd f12, CCSTATE->fpr[11]
+  |  lfd f13, CCSTATE->fpr[12]
+  |  .endif
   |3:
   |  .toc std TOCREG, SAVE_TOC
   |   lp FUNCREG, CCSTATE->func
