@@ -364,9 +364,27 @@
 
 #if LJ_ARCH_BITS == 64
 
+#if LJ_ARCH_PPC_ELFV2
+
+#define CCALL_HANDLE_STRUCTRET \
+  if (sz > 16) { \
+    cc->retref = 1;  /* Return by reference. */ \
+    cc->gpr[ngpr++] = (GPRArg)dp; \
+  }
+
+#define CCALL_HANDLE_STRUCTRET2 \
+  if (sz < 8 && LJ_BE) { \
+    sp += 8 - sz; \
+  } \
+  memcpy(dp, sp, ctr->size);
+
+#else
+
 #define CCALL_HANDLE_STRUCTRET \
   cc->retref = 1;  /* Return all structs by reference. */ \
   cc->gpr[ngpr++] = (GPRArg)dp;
+
+#endif
 
 #define CCALL_HANDLE_COMPLEXRET \
   /* Complex values are returned in 2 or 4 GPRs. */ \
