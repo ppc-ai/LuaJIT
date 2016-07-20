@@ -1093,7 +1093,7 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
     }
 #if LJ_TARGET_PPC && LJ_ARCH_BITS == 64 && LJ_BE
     if (ctype_isstruct(d->info) && sz < CTSIZE_PTR) {
-      dp = (char *)dp + (CTSIZE_PTR - dp);
+      dp = (char *)dp + (CTSIZE_PTR - sz);
     }
 #endif
     lj_cconv_ct_tv(cts, d, (uint8_t *)dp, o, CCF_ARG(narg));
