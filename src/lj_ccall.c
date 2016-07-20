@@ -894,6 +894,7 @@ static unsigned int ccall_classify_fp(CTState *cts, CType *ct) {
     int res = -1;
     int sz = ct->size;
     while (ct->sib) {
+      ct = ctype_get(cts, ct->sib);
       if (ctype_isfield(ct->info)) {
         int sub = ccall_classify_fp(cts, ctype_rawchild(cts, ct));
         if (res == -1)
