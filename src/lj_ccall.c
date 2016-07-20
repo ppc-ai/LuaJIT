@@ -377,10 +377,10 @@
   int i; \
   if (isfp == FTYPE_FLOAT) { \
     for (i = 0; i < ctr->size / 4; i++) \
-      ((float *)dp)[i] = ctr->fpr[i]; \
+      ((float *)dp)[i] = cc->fpr[i]; \
   } else if (isfp == FTYPE_DOUBLE) { \
     for (i = 0; i < ctr->size / 8; i++) \
-      ((double *)dp)[i] = ctr->fpr[i]; \
+      ((double *)dp)[i] = cc->fpr[i]; \
   } else { \
     if (ctr->size < 8 && LJ_BE) { \
       sp += 8 - ctr->size; \
