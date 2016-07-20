@@ -880,17 +880,17 @@ noth:  /* Not a homogeneous float/double aggregate. */
 #define FTYPE_DOUBLE	2
 
 static unsigned int ccall_classify_fp(CTState *cts, CType *ct) {
-  if (ctype_isfp(ct)) {
+  if (ctype_isfp(ct->info)) {
     if (ct->size == sizeof(float))
       return FTYPE_FLOAT;
     else
       return FTYPE_DOUBLE;
-  } else if (ctype_iscomplex(ct)) {
+  } else if (ctype_iscomplex(ct->info)) {
     if (ct->size == sizeof(float) * 2)
       return FTYPE_FLOAT;
     else
       return FTYPE_DOUBLE;
-  } else if (ctype_isstruct(ct)) {
+  } else if (ctype_isstruct(ct->info)) {
     int res = -1;
     int sz = ct->size;
     while (ct->sib) {
