@@ -1168,10 +1168,12 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
 #endif
 #if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
     if (isfp) {
+      int i;
       for (i = 0; i < d->size / 8 && nfpr < CCALL_NARG_FPR; i++)
         cc->fpr[nfpr++] = ((double *)dp)[i];
     }
     if (isf32) {
+      int i;
       for (i = 0; i < d->size / 8; i++)
         ((float *)dp)[i*2] = ((double *)dp)[i];
     }
