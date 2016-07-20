@@ -370,31 +370,45 @@
   /* Complex values are returned in 2 or 4 GPRs. */ \
   cc->retref = 0;
 
-#define CCALL_HANDLE_COMPLEXRET2 \
-  memcpy(dp, sp, ctr->size);  /* Copy complex from GPRs. */
-
 #define CCALL_HANDLE_STRUCTARG \
   rp = cdataptr(lj_cdata_new(cts, did, sz)); \
   sz = CTSIZE_PTR;  /* Pass all structs by reference. */
 
-#define CCALL_HANDLE_COMPLEXARG \
-  /* Pass complex by value in 2 or 4 GPRs. */
-
 #if LJ_ARCH_BITS == 64
+
+#define CCALL_HANDLE_COMPLEXRET2 \
+  if (ctr->size == 2*sizeof(float)) {  /* Copy complex float from FPRs. */ \
+    ((float *)dp)[0] = cc->fpr[0].d; \
+    ((float *)dp)[1] = cc->fpr[1].d; \
+  } else {  /* Copy complex double from FPRs. */ \
+    ((double *)dp)[0] = cc->fpr[0].d; \
+    ((double *)dp)[1] = cc->fpr[1].d; \
+  }
+
+#define CCALL_HANDLE_COMPLEXARG \
+  isfp = 1;  /* Pass complex by value in FPRs or on stack. */
+
 #define CCALL_HANDLE_REGARG \
   if (isva) {  /* only GPRs will be used on C ellipsis operator */ \
     goto gpr; \
   } \
   else { \
     if (isfp) {  /* Try to pass argument in FPRs. */ \
-      if (nfpr + 1 <= CCALL_NARG_FPR) { \
+      if (nfpr + isfp <= CCALL_NARG_FPR) { \
        dp = &cc->fpr[nfpr]; \
-       nfpr += 1; \
+       nfpr += isfp; \
        if (ngpr + 1 <= maxgpr) \
          ngpr += 1;  /* align GPRs */ \
        else \
          nsp += 1; \
-       d = ctype_get(cts, CTID_DOUBLE);  /* FPRs always hold doubles. */ \
+       if (isfp == 2) { \
+         if (ngpr + 1 <= maxgpr) \
+           ngpr += 1;  /* align GPRs */ \
+         else \
+           nsp += 1; \
+         d = ctype_get(cts, CTID_COMPLEX_DOUBLE);  /* FPRs always hold doubles. */ \
+       } else \
+         d = ctype_get(cts, CTID_DOUBLE);  /* FPRs always hold doubles. */ \
        goto done; \
       } \
     } else {  /* Try to pass argument in GPRs. */ \
@@ -413,7 +427,15 @@
       } \
     } \
   }
+
 #else
+
+#define CCALL_HANDLE_COMPLEXRET2 \
+  memcpy(dp, sp, ctr->size);  /* Copy complex from GPRs. */
+
+#define CCALL_HANDLE_COMPLEXARG \
+  /* Pass complex by value in 2 or 4 GPRs. */
+
 #define CCALL_HANDLE_REGARG \
   if (isfp) {  /* Try to pass argument in FPRs. */ \
     if (nfpr + 1 <= CCALL_NARG_FPR) { \
@@ -436,6 +458,7 @@
       goto done; \
     } \
   }
+
 #endif
 
 #define CCALL_HANDLE_RET \

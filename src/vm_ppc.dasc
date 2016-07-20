@@ -3052,6 +3052,9 @@ static void build_subroutines(BuildCtx *ctx)
   |  lp CRET1, CTSTATE->cb.gpr[0]
   |  lfd FARG1, CTSTATE->cb.fpr[0]
   |  lp CRET2, CTSTATE->cb.gpr[1]
+  |  .if GPR64
+  |    lfd FARG2, CTSTATE->cb.fpr[1]
+  |  .endif
   |  b ->vm_leave_unw
   |.endif
   |
@@ -3151,6 +3154,9 @@ static void build_subroutines(BuildCtx *ctx)
   |  stp CARG1, CCSTATE:TMP1->gpr[0]
   |  stfd FARG1, CCSTATE:TMP1->fpr[0]
   |  stp CARG2, CCSTATE:TMP1->gpr[1]
+  |  .if GPR64
+  |   stfd FARG2, CCSTATE:TMP1->fpr[1]
+  |  .endif
   |   mtlr TMP0
   |  stp CARG3, CCSTATE:TMP1->gpr[2]
   |   mr sp, r14
