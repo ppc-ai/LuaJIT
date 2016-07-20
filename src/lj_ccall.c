@@ -386,7 +386,7 @@
   }
 
 #define CCALL_HANDLE_COMPLEXARG \
-  isfp = 1;  /* Pass complex by value in FPRs or on stack. */
+  isfp = 2;  /* Pass complex by value in FPRs or on stack. */
 
 #define CCALL_HANDLE_REGARG \
   if (isva) {  /* only GPRs will be used on C ellipsis operator */ \
