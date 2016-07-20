@@ -378,11 +378,11 @@
 
 #define CCALL_HANDLE_COMPLEXRET2 \
   if (ctr->size == 2*sizeof(float)) {  /* Copy complex float from FPRs. */ \
-    ((float *)dp)[0] = cc->fpr[0].d; \
-    ((float *)dp)[1] = cc->fpr[1].d; \
+    ((float *)dp)[0] = cc->fpr[0]; \
+    ((float *)dp)[1] = cc->fpr[1]; \
   } else {  /* Copy complex double from FPRs. */ \
-    ((double *)dp)[0] = cc->fpr[0].d; \
-    ((double *)dp)[1] = cc->fpr[1].d; \
+    ((double *)dp)[0] = cc->fpr[0]; \
+    ((double *)dp)[1] = cc->fpr[1]; \
   }
 
 #define CCALL_HANDLE_COMPLEXARG \
