@@ -367,16 +367,26 @@
 #if LJ_ARCH_PPC_ELFV2
 
 #define CCALL_HANDLE_STRUCTRET \
-  if (sz > 16) { \
+  if (sz > 16 && ccall_classify_fp(cts, ctr) <= 0) { \
     cc->retref = 1;  /* Return by reference. */ \
     cc->gpr[ngpr++] = (GPRArg)dp; \
   }
 
 #define CCALL_HANDLE_STRUCTRET2 \
-  if (ctr->size < 8 && LJ_BE) { \
-    sp += 8 - ctr->size; \
-  } \
-  memcpy(dp, sp, ctr->size);
+  int isfp = ccall_classify_fp(cts, ctr); \
+  int i; \
+  if (isfp == FTYPE_FLOAT) { \
+    for (i = 0; i < ctr->size / 4; i++) \
+      ((float *)dp)[i] = ctr->fpr[i]; \
+  } else if (isfp == FTYPE_DOUBLE) { \
+    for (i = 0; i < ctr->size / 8; i++) \
+      ((double *)dp)[i] = ctr->fpr[i]; \
+  } else { \
+    if (ctr->size < 8 && LJ_BE) { \
+      sp += 8 - ctr->size; \
+    } \
+    memcpy(dp, sp, ctr->size); \
+  }
 
 #else
 
@@ -402,46 +412,28 @@
   }
 
 #define CCALL_HANDLE_COMPLEXARG \
-  isfp = 2;  /* Pass complex by value in FPRs or on stack. */
+  isfp = 1; \
+  if (d->size == sizeof(float) * 2) { \
+    d = ctype_get(cts, CTID_COMPLEX_DOUBLE); \
+    isf32 = 1; \
+  }
 
 #define CCALL_HANDLE_REGARG \
-  if (isva) {  /* only GPRs will be used on C ellipsis operator */ \
-    goto gpr; \
+  if (isfp && d->size == sizeof(float)) { \
+    d = ctype_get(cts, CTID_DOUBLE); \
+    isf32 = 1; \
   } \
-  else { \
-    if (isfp) {  /* Try to pass argument in FPRs. */ \
-      if (nfpr + isfp <= CCALL_NARG_FPR) { \
-       dp = &cc->fpr[nfpr]; \
-       nfpr += isfp; \
-       if (ngpr + 1 <= maxgpr) \
-         ngpr += 1;  /* align GPRs */ \
-       else \
-         nsp += 1; \
-       if (isfp == 2) { \
-         if (ngpr + 1 <= maxgpr) \
-           ngpr += 1;  /* align GPRs */ \
-         else \
-           nsp += 1; \
-         d = ctype_get(cts, CTID_COMPLEX_DOUBLE);  /* FPRs always hold doubles. */ \
-       } else \
-         d = ctype_get(cts, CTID_DOUBLE);  /* FPRs always hold doubles. */ \
-       goto done; \
-      } \
-    } else {  /* Try to pass argument in GPRs. */ \
-  gpr: \
-      if (ngpr < maxgpr) { \
-       dp = &cc->gpr[ngpr]; \
-       ngpr += n; \
-       if (ngpr > maxgpr) { \
-         nsp += ngpr - 8; \
-         ngpr = 8; \
-         if (nsp > CCALL_MAXSTACK) { \
-           goto err_nyi; \
-         } \
-       } \
-       goto done; \
-      } \
-    } \
+  if (ngpr < maxgpr) { \
+   dp = &cc->gpr[ngpr]; \
+   ngpr += n; \
+   if (ngpr > maxgpr) { \
+     nsp += ngpr - 8; \
+     ngpr = 8; \
+     if (nsp > CCALL_MAXSTACK) { \
+       goto err_nyi; \
+     } \
+   } \
+   goto done; \
   }
 
 #else
@@ -880,6 +872,49 @@ noth:  /* Not a homogeneous float/double aggregate. */
 
 #endif
 
+/* -- PowerPC64 ELFv2 ABI struct classification ------------------- */
+
+#if LJ_ARCH_PPC_ELFV2
+
+#define FTYPE_FLOAT	1
+#define FTYPE_DOUBLE	2
+
+static unsigned int ccall_classify_fp(CTState *cts, CType *ct) {
+  if (ctype_isfp(ct)) {
+    if (ct->size == sizeof(float))
+      return FTYPE_FLOAT;
+    else
+      return FTYPE_DOUBLE;
+  } else if (ctype_iscomplex(ct)) {
+    if (ct->size == sizeof(float) * 2)
+      return FTYPE_FLOAT;
+    else
+      return FTYPE_DOUBLE;
+  } else if (ctype_isstruct(ct)) {
+    int res = -1;
+    int sz = ct->size;
+    while (ct->sib) {
+      if (ctype_isfield(ct->info)) {
+        int sub = ccall_classify_fp(cts, ctype_rawchild(cts, ct));
+        if (res == -1)
+          res = sub;
+        if (sub != -1 && sub != res)
+          return 0;
+      } else if (ctype_isbitfield(ct->info) ||
+        ctype_isxattrib(ct->info, CTA_SUBTYPE)) {
+        return 0;
+      }
+    }
+    if (res > 0 && sz > res * 4 * 8)
+      return 0;
+    return res;
+  } else {
+    return 0;
+  }
+}
+
+#endif
+
 /* -- MIPS64 ABI struct classification ---------------------------- */
 
 #if LJ_TARGET_MIPS64
@@ -1053,6 +1088,9 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
     CTSize sz;
     MSize n, isfp = 0, isva = 0;
     void *dp, *rp = NULL;
+#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
+    int isf32 = 0;
+#endif
 
     if (fid) {  /* Get argument type from field. */
       CType *ctf = ctype_get(cts, fid);
@@ -1115,6 +1153,29 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
     }
 #endif
     lj_cconv_ct_tv(cts, d, (uint8_t *)dp, o, CCF_ARG(narg));
+#if LJ_ARCH_PPC_ELFV2
+    if (ctype_isstruct(d->info)) {
+      isfp = ccall_classify_fp(cts, d);
+      int i;
+      if (isfp == FTYPE_FLOAT) {
+        for (i = 0; i < d->size / 4 && nfpr < CCALL_NARG_FPR; i++)
+          cc->fpr[nfpr++] = ((float *)dp)[i];
+      } else if (isfp == FTYPE_DOUBLE) {
+        for (i = 0; i < d->size / 8 && nfpr < CCALL_NARG_FPR; i++)
+          cc->fpr[nfpr++] = ((double *)dp)[i];
+      }
+    }
+#endif
+#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
+    if (isfp) {
+      for (i = 0; i < d->size / 8 && nfpr < CCALL_NARG_FPR; i++)
+        cc->fpr[nfpr++] = ((double *)dp)[i];
+    }
+    if (isf32) {
+      for (i = 0; i < d->size / 8; i++)
+        ((float *)dp)[i*2] = ((double *)dp)[i];
+    }
+#endif
     /* Extend passed integers to 32 bits at least. */
     if (ctype_isinteger_or_bool(d->info) && d->size < 4) {
       if (d->info & CTF_UNSIGNED)

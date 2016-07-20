@@ -3054,7 +3054,16 @@ static void build_subroutines(BuildCtx *ctx)
   |  lp CRET2, CTSTATE->cb.gpr[1]
   |  .if GPR64
   |    lfd FARG2, CTSTATE->cb.fpr[1]
+  |  .else
+  |    lp CARG3, CTSTATE->cb.gpr[2]
+  |    lp CARG4, CTSTATE->cb.gpr[3]
   |  .endif
+  |  .elfv2 lfd FARG3, CTSTATE->cb.fpr[2]
+  |  .elfv2 lfd FARG4, CTSTATE->cb.fpr[3]
+  |  .elfv2 lfd FARG5, CTSTATE->cb.fpr[4]
+  |  .elfv2 lfd FARG6, CTSTATE->cb.fpr[5]
+  |  .elfv2 lfd FARG7, CTSTATE->cb.fpr[6]
+  |  .elfv2 lfd FARG8, CTSTATE->cb.fpr[7]
   |  b ->vm_leave_unw
   |.endif
   |
