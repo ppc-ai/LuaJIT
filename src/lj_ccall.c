@@ -362,6 +362,8 @@
 #elif LJ_TARGET_PPC
 /* -- PPC calling conventions --------------------------------------------- */
 
+#if LJ_ARCH_BITS == 64
+
 #define CCALL_HANDLE_STRUCTRET \
   cc->retref = 1;  /* Return all structs by reference. */ \
   cc->gpr[ngpr++] = (GPRArg)dp;
@@ -370,11 +372,7 @@
   /* Complex values are returned in 2 or 4 GPRs. */ \
   cc->retref = 0;
 
-#define CCALL_HANDLE_STRUCTARG \
-  rp = cdataptr(lj_cdata_new(cts, did, sz)); \
-  sz = CTSIZE_PTR;  /* Pass all structs by reference. */
-
-#if LJ_ARCH_BITS == 64
+#define CCALL_HANDLE_STRUCTARG
 
 #define CCALL_HANDLE_COMPLEXRET2 \
   if (ctr->size == 2*sizeof(float)) {  /* Copy complex float from FPRs. */ \
@@ -413,22 +411,34 @@
       } \
     } else {  /* Try to pass argument in GPRs. */ \
   gpr: \
-      if (n > 1) { \
-       lua_assert(n == 2 || n == 4);  /* int64_t or complex (float). */ \
-       if (ctype_isinteger(d->info)) \
-         ngpr = (ngpr + 1u) & ~1u;  /* Align int64_t to regpair. */ \
-       else if (ngpr + n > maxgpr) \
-         ngpr = maxgpr;  /* Prevent reordering. */ \
-      } \
-      if (ngpr + n <= maxgpr) { \
+      if (ngpr < maxgpr) { \
        dp = &cc->gpr[ngpr]; \
        ngpr += n; \
+       if (ngpr > maxgpr) { \
+         nsp += ngpr - 8; \
+         ngpr = 8; \
+         if (nsp > CCALL_MAXSTACK) { \
+           goto err_nyi; \
+         } \
+       } \
        goto done; \
       } \
     } \
   }
 
 #else
+
+#define CCALL_HANDLE_STRUCTRET \
+  cc->retref = 1;  /* Return all structs by reference. */ \
+  cc->gpr[ngpr++] = (GPRArg)dp;
+
+#define CCALL_HANDLE_COMPLEXRET \
+  /* Complex values are returned in 2 or 4 GPRs. */ \
+  cc->retref = 0;
+
+#define CCALL_HANDLE_STRUCTARG \
+  rp = cdataptr(lj_cdata_new(cts, did, sz)); \
+  sz = CTSIZE_PTR;  /* Pass all structs by reference. */
 
 #define CCALL_HANDLE_COMPLEXRET2 \
   memcpy(dp, sp, ctr->size);  /* Copy complex from GPRs. */
@@ -1081,6 +1091,11 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
       *(void **)dp = rp;
       dp = rp;
     }
+#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64 && LJ_BE
+    if (ctype_isstruct(d->info) && sz < CTSIZE_PTR) {
+      dp = (char *)dp + (CTSIZE_PTR - dp);
+    }
+#endif
     lj_cconv_ct_tv(cts, d, (uint8_t *)dp, o, CCF_ARG(narg));
     /* Extend passed integers to 32 bits at least. */
     if (ctype_isinteger_or_bool(d->info) && d->size < 4) {
