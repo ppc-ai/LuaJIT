@@ -3109,6 +3109,7 @@ static void build_subroutines(BuildCtx *ctx)
   |  lfd f7, CCSTATE->fpr[6]
   |  lfd f8, CCSTATE->fpr[7]
   |3:
+  |  .toc std TOCREG, SAVE_TOC
   |   lp FUNCREG, CCSTATE->func
   |  lp CARG2, CCSTATE->gpr[1]
   |  lp CARG3, CCSTATE->gpr[2]
@@ -3120,7 +3121,6 @@ static void build_subroutines(BuildCtx *ctx)
   |   mtctr FUNCREG
   |  lp r8, CCSTATE->gpr[5]
   |  lp r9, CCSTATE->gpr[6]
-  |  .toc std TOCREG, SAVE_TOC
   |  lp r10, CCSTATE->gpr[7]
   |  lp CARG1, CCSTATE->gpr[0]		// Do this last, since CCSTATE is CARG1.
   |   bctrl
