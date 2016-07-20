@@ -86,7 +86,11 @@ typedef union FPRArg {
 #elif LJ_TARGET_PPC
 
 #define CCALL_NARG_GPR		8
+#if LJ_ARCH_BITS == 64
+#define CCALL_NARG_FPR		13
+#else
 #define CCALL_NARG_FPR		8
+#endif
 #define CCALL_NRET_GPR		4	/* For complex double. */
 #define CCALL_NRET_FPR		1
 #if LJ_ARCH_PPC_ELFV2
