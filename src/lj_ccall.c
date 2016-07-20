@@ -373,8 +373,8 @@
   }
 
 #define CCALL_HANDLE_STRUCTRET2 \
-  if (sz < 8 && LJ_BE) { \
-    sp += 8 - sz; \
+  if (ctr->size < 8 && LJ_BE) { \
+    sp += 8 - ctr->size; \
   } \
   memcpy(dp, sp, ctr->size);
 
