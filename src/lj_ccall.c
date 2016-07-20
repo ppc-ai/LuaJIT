@@ -1154,6 +1154,18 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
     }
 #endif
     lj_cconv_ct_tv(cts, d, (uint8_t *)dp, o, CCF_ARG(narg));
+#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
+    if (isfp) {
+      int i;
+      for (i = 0; i < d->size / 8 && nfpr < CCALL_NARG_FPR; i++)
+        cc->fpr[nfpr++] = ((double *)dp)[i];
+    }
+    if (isf32) {
+      int i;
+      for (i = 0; i < d->size / 8; i++)
+        ((float *)dp)[i*2] = ((double *)dp)[i];
+    }
+#endif
 #if LJ_ARCH_PPC_ELFV2
     if (ctype_isstruct(d->info)) {
       isfp = ccall_classify_fp(cts, d);
@@ -1165,18 +1177,6 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
         for (i = 0; i < d->size / 8 && nfpr < CCALL_NARG_FPR; i++)
           cc->fpr[nfpr++] = ((double *)dp)[i];
       }
-    }
-#endif
-#if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
-    if (isfp) {
-      int i;
-      for (i = 0; i < d->size / 8 && nfpr < CCALL_NARG_FPR; i++)
-        cc->fpr[nfpr++] = ((double *)dp)[i];
-    }
-    if (isf32) {
-      int i;
-      for (i = 0; i < d->size / 8; i++)
-        ((float *)dp)[i*2] = ((double *)dp)[i];
     }
 #endif
     /* Extend passed integers to 32 bits at least. */
