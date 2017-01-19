@@ -29,9 +29,9 @@ IF(WIN32)
 ELSE()
   SET(INSTALL_BIN_SUBDIR "bin" CACHE STRING "installation executable subdirectory name")
   SET(INSTALL_LIB_SUBDIR "lib" CACHE STRING "installation library subdirectory name")
-  SET(INSTALL_LUA_PATH_SUBDIR "share/lua/5.1/" CACHE STRING "lua path subdirectory name")
+  SET(INSTALL_LUA_PATH_SUBDIR "share/lua/5.1") # not editable
   SET(INSTALL_LUA_LIB_SUBDIR "lib" CACHE STRING "installation lua lib subdirectory name")
-  SET(INSTALL_LUA_CPATH_SUBDIR "${INSTALL_LUA_LIB_SUBDIR}/lua/5.1/" CACHE STRING "lua cpath subdirectory name")
+  SET(INSTALL_LUA_CPATH_SUBDIR "${INSTALL_LUA_LIB_SUBDIR}/lua/5.1") # not editable
 ENDIF()
 
 ADD_DEFINITIONS(-DLUA_MULTILIB="${INSTALL_LUA_LIB_SUBDIR}")
@@ -165,11 +165,6 @@ if ( LUA_USE_LIBM )
   list ( APPEND LIBS m )
 endif ()
 
-CHECK_LIBRARY_EXISTS(ncurses printw "" LUA_USE_LIBNCURSES)
-if ( LUA_USE_LIBNCURSES )
-  list ( APPEND LIBS ncurses )
-endif ()
-
 SET(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 FIND_PACKAGE(Threads)
 IF(THREADS_FOUND)
@@ -206,7 +201,7 @@ int main() { return 0; }
 ENDMACRO()
 
 SET(CMAKE_REQUIRED_INCLUDES ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/src)
-FOREACH(arch X64 X86 ARM ARM64 PPC PPCSPE MIPS)
+FOREACH(arch X64 X86 ARM PPC PPCSPE MIPS)
   LJ_TEST_ARCH(LJ_TARGET_${arch})
   if(LJ_TARGET_${arch})
     STRING(TOLOWER ${arch} TARGET_LJARCH)
@@ -275,28 +270,23 @@ IF(TARGET_LJARCH STREQUAL "ppc")
   LJ_TEST_ARCH_VALUE(LJ_ARCH_PPC64 1)
   IF(NOT LJ_ARCH_PPC64_1)
     SET(DASM_FLAGS ${DASM_FLAGS} -D GPR64)
+  ELSE()
+    SET(DASM_ARCH "ppc64")
+    LIST(APPEND TARGET_ARCH "DLJ_ARCH_ENDIAN=LUAJIT_LE")
   ENDIF()
 ENDIF()
 
-if(LUAJIT_SYSTEM_MINILUA)
-  MESSAGE(STATUS "Using system lua for generating dynasm via: ${LUAJIT_SYSTEM_MINILUA}")
-  # SET(LUAJIT_SYSTEM_MINILUA ${LUAJIT_SYSTEM_MINILUA} CACHE STRING "system minilua" FORCE)
-  MESSAGE(STATUS "Executing command: ${LUAJIT_SYSTEM_MINILUA} ${CMAKE_CURRENT_SOURCE_DIR}/dynasm/dynasm.lua ${DASM_FLAGS} -o ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h ${CMAKE_CURRENT_SOURCE_DIR}/src/vm_${DASM_ARCH}.dasc")
-  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h
-    COMMAND ${LUAJIT_SYSTEM_MINILUA} ${CMAKE_CURRENT_SOURCE_DIR}/dynasm/dynasm.lua ${DASM_FLAGS} -o ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h ${CMAKE_CURRENT_SOURCE_DIR}/src/vm_${DASM_ARCH}.dasc)
-else(LUAJIT_SYSTEM_MINILUA)
-  add_executable(minilua src/host/minilua.c)
-  SET_TARGET_PROPERTIES(minilua PROPERTIES COMPILE_DEFINITIONS "${TARGET_ARCH}")
-  CHECK_LIBRARY_EXISTS(m sin "" MINILUA_USE_LIBM)
-  if(MINILUA_USE_LIBM)
-    TARGET_LINK_LIBRARIES(minilua m)
-  endif()
+add_executable(minilua src/host/minilua.c)
+SET_TARGET_PROPERTIES(minilua PROPERTIES COMPILE_DEFINITIONS "${TARGET_ARCH}")
+CHECK_LIBRARY_EXISTS(m sin "" MINILUA_USE_LIBM)
+if(MINILUA_USE_LIBM)
+  TARGET_LINK_LIBRARIES(minilua m)
+endif()
 
-  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h
-    COMMAND minilua ${CMAKE_CURRENT_SOURCE_DIR}/dynasm/dynasm.lua ${DASM_FLAGS} -o ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h ${CMAKE_CURRENT_SOURCE_DIR}/src/vm_${DASM_ARCH}.dasc
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/dynasm/dynasm.lua minilua
-  )
-endif(LUAJIT_SYSTEM_MINILUA)
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h
+  COMMAND minilua ${CMAKE_CURRENT_SOURCE_DIR}/dynasm/dynasm.lua ${DASM_FLAGS} -o ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h ${CMAKE_CURRENT_SOURCE_DIR}/src/vm_${DASM_ARCH}.dasc
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/dynasm/dynasm.lua minilua
+)
 
 SET(SRC_LJLIB src/lib_base.c src/lib_math.c src/lib_bit.c src/lib_string.c src/lib_table.c
   src/lib_io.c src/lib_os.c src/lib_package.c src/lib_debug.c src/lib_jit.c src/lib_ffi.c)
@@ -319,33 +309,23 @@ src/host/buildvm_peobj.c src/host/buildvm_lib.c src/host/buildvm_fold.c
 ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h)
 
 ## GENERATE
-if(LUAJIT_SYSTEM_BUILDVM)
-else(LUAJIT_SYSTEM_BUILDVM)
-  ADD_EXECUTABLE(buildvm ${SRC_BUILDVM})
-  SET_TARGET_PROPERTIES(buildvm PROPERTIES COMPILE_DEFINITIONS "${TARGET_ARCH}")
-endif(LUAJIT_SYSTEM_BUILDVM)
+ADD_EXECUTABLE(buildvm ${SRC_BUILDVM})
+SET_TARGET_PROPERTIES(buildvm PROPERTIES COMPILE_DEFINITIONS "${TARGET_ARCH}")
 
 macro(add_buildvm_target _target _mode)
-  if(LUAJIT_SYSTEM_BUILDVM)
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_target}
-      COMMAND ${LUAJIT_SYSTEM_BUILDVM} ARGS -m ${_mode} -o ${CMAKE_CURRENT_BINARY_DIR}/${_target} ${ARGN}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-  else(LUAJIT_SYSTEM_BUILDVM)
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_target}
-      COMMAND buildvm ARGS -m ${_mode} -o ${CMAKE_CURRENT_BINARY_DIR}/${_target} ${ARGN}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-      DEPENDS buildvm ${ARGN}
-    )
-   endif(LUAJIT_SYSTEM_BUILDVM)
+  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${_target}
+    COMMAND buildvm ARGS -m ${_mode} -o ${CMAKE_CURRENT_BINARY_DIR}/${_target} ${ARGN}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS buildvm ${ARGN}
+  )
 endmacro(add_buildvm_target)
 
 if (MSVC)
   add_buildvm_target ( lj_vm.obj peobj )
   set (LJ_VM_SRC ${CMAKE_CURRENT_BINARY_DIR}/lj_vm.obj)
 else ()
-  add_buildvm_target ( lj_vm.S ${LJVM_MODE} )
-  set (LJ_VM_SRC ${CMAKE_CURRENT_BINARY_DIR}/lj_vm.S)
+  add_buildvm_target ( lj_vm.s ${LJVM_MODE} )
+  set (LJ_VM_SRC ${CMAKE_CURRENT_BINARY_DIR}/lj_vm.s)
 endif ()
 add_buildvm_target ( lj_ffdef.h   ffdef   ${SRC_LJLIB} )
 add_buildvm_target ( lj_bcdef.h  bcdef  ${SRC_LJLIB} )
@@ -369,12 +349,8 @@ include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR} dynasm src)
 
 IF(WITH_AMALG)
   add_library(libluajit SHARED src/ljamalg.c ${DEPS} )
-  add_library(luajit-static STATIC src/ljamalg.c ${DEPS} )
-  set_property(TARGET luajit-static PROPERTY POSITION_INDEPENDENT_CODE 1)
 ELSE()
   add_library(libluajit SHARED ${SRC_LJCORE} ${DEPS} )
-  add_library(luajit-static STATIC ${SRC_LJCORE} ${DEPS} )
-  set_property(TARGET luajit-static PROPERTY POSITION_INDEPENDENT_CODE 1)
 ENDIF()
 
 target_link_libraries (libluajit ${LIBS} )
