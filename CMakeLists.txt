@@ -26,7 +26,7 @@ INSTALL(FILES src/luaconf.h src/lua.h src/lauxlib.h src/lualib.h
               src/lua.hpp src/luajit.h
   DESTINATION "${INSTALL_INCLUDE_SUBDIR}")
 
-INSTALL(FILES
+INSTALL(PROGRAMS
   src/luajit
   DESTINATION "${INSTALL_BIN_SUBDIR}")
 
