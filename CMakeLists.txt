@@ -381,20 +381,16 @@ target_link_libraries (libluajit ${LIBS} )
 SET_TARGET_PROPERTIES(libluajit PROPERTIES
   PREFIX "lib" IMPORT_PREFIX "lib" OUTPUT_NAME "luajit")
 
-IF(WIN32)
-  add_executable(luajit src/luajit.c)
-  target_link_libraries(luajit libluajit)
-ELSE()
-  IF(WITH_AMALG)
-    add_executable(luajit src/luajit.c src/ljamalg.c ${DEPS})
-  ELSE()
-    add_executable(luajit src/luajit.c ${SRC_LJCORE} ${DEPS})
-  ENDIF()
-  target_link_libraries(luajit ${LIBS})
-  SET_TARGET_PROPERTIES(luajit PROPERTIES ENABLE_EXPORTS ON)
-ENDIF()
+add_custom_target(
+  luajit ALL
+  COMMAND make -C src
+  COMMAND cp src/luajit  ${CMAKE_CURRENT_BINARY_DIR}
+)
 
-INSTALL(TARGETS libluajit luajit
+INSTALL(PROGRAMS luajit
+  DESTINATION "${INSTALL_BIN_SUBDIR}")
+
+INSTALL(TARGETS libluajit
   EXPORT torch-exports
   RUNTIME DESTINATION "${INSTALL_BIN_SUBDIR}"
   LIBRARY DESTINATION "${INSTALL_LIB_SUBDIR}"
@@ -402,5 +398,6 @@ INSTALL(TARGETS libluajit luajit
 
 INSTALL(FILES
   src/jit/bc.lua src/jit/v.lua src/jit/dump.lua src/jit/dis_x86.lua src/jit/dis_x64.lua src/jit/dis_arm.lua
-  src/jit/dis_ppc.lua src/jit/dis_mips.lua src/jit/dis_mipsel.lua src/jit/bcsave.lua src/jit/bc.lua src/jit/p.lua src/jit/zone.lua ${CMAKE_CURRENT_BINARY_DIR}/vmdef.lua
+  src/jit/dis_ppc.lua src/jit/dis_mips.lua src/jit/dis_mipsel.lua src/jit/bcsave.lua src/jit/bc.lua src/jit/p.lua
+  src/jit/zone.lua src/jit/vmdef.lua
   DESTINATION "${INSTALL_LUA_PATH_SUBDIR}/jit")
