@@ -319,6 +319,12 @@ src/host/buildvm_peobj.c src/host/buildvm_lib.c src/host/buildvm_fold.c
 ${CMAKE_CURRENT_BINARY_DIR}/buildvm_arch.h)
 
 ## GENERATE
+add_custom_target(
+  luajit ALL
+  COMMAND make -C ${CMAKE_CURRENT_SOURCE_DIR}/src
+  COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/src/luajit  ${CMAKE_CURRENT_BINARY_DIR}
+)
+
 if(LUAJIT_SYSTEM_BUILDVM)
 else(LUAJIT_SYSTEM_BUILDVM)
   ADD_EXECUTABLE(buildvm ${SRC_BUILDVM})
@@ -344,8 +350,8 @@ if (MSVC)
   add_buildvm_target ( lj_vm.obj peobj )
   set (LJ_VM_SRC ${CMAKE_CURRENT_BINARY_DIR}/lj_vm.obj)
 else ()
-  add_buildvm_target ( lj_vm.S ${LJVM_MODE} )
-  set (LJ_VM_SRC ${CMAKE_CURRENT_BINARY_DIR}/lj_vm.S)
+#  add_buildvm_target ( lj_vm.S ${LJVM_MODE} )
+  set (LJ_VM_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/lj_vm.S)
 endif ()
 add_buildvm_target ( lj_ffdef.h   ffdef   ${SRC_LJLIB} )
 add_buildvm_target ( lj_bcdef.h  bcdef  ${SRC_LJLIB} )
@@ -380,12 +386,6 @@ ENDIF()
 target_link_libraries (libluajit ${LIBS} )
 SET_TARGET_PROPERTIES(libluajit PROPERTIES
   PREFIX "lib" IMPORT_PREFIX "lib" OUTPUT_NAME "luajit")
-
-add_custom_target(
-  luajit ALL
-  COMMAND make -C src
-  COMMAND cp src/luajit  ${CMAKE_CURRENT_BINARY_DIR}
-)
 
 INSTALL(PROGRAMS luajit
   DESTINATION "${INSTALL_BIN_SUBDIR}")
