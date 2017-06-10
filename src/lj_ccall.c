@@ -1180,13 +1180,15 @@ static int ccall_set_args(lua_State *L, CTState *cts, CType *ct,
     }
 #endif
     /* Extend passed integers to 32 bits at least. */
-    if (ctype_isinteger_or_bool(d->info) && d->size < 4) {
+    if (ctype_isinteger_or_bool(d->info) && d->size < 8) {
       if (d->info & CTF_UNSIGNED)
-	*(uint32_t *)dp = d->size == 1 ? (uint32_t)*(uint8_t *)dp :
-					 (uint32_t)*(uint16_t *)dp;
+        *(uint64_t *)dp = (uint64_t)(d->size == 1 ? *(uint8_t  *)dp :
+                                     d->size == 2 ? *(uint16_t *)dp :
+                                                    *(uint32_t *)dp);
       else
-	*(int32_t *)dp = d->size == 1 ? (int32_t)*(int8_t *)dp :
-					(int32_t)*(int16_t *)dp;
+        *(int64_t *)dp = (int64_t)(d->size == 1 ? *(int8_t  *)dp :
+                                   d->size == 2 ? *(int16_t *)dp :
+                                                  *(int32_t *)dp);
     }
 #if LJ_TARGET_PPC && LJ_ARCH_BITS == 64
     if ((ctype_isinteger_or_bool(d->info) || ctype_isenum(d->info))
