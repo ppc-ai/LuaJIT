@@ -1,0 +1,2979 @@
+	.file "buildvm_ppc.dasc"
+	.abiversion 2
+	.text
+	.p2align 4
+
+	.globl lj_vm_asm_begin
+	.hidden lj_vm_asm_begin
+	.type lj_vm_asm_begin, @object
+	.size lj_vm_asm_begin, 0
+lj_vm_asm_begin:
+.Lbegin:
+
+	.globl lj_BC_ISLT
+	.hidden lj_BC_ISLT
+	.type lj_BC_ISLT, @function
+	.size lj_BC_ISLT, 172
+lj_BC_ISLT:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7d19602e
+	.long 0x8130fffc,0x7c00b040,0x7cae602e,0x552993ba
+	.long 0x7c88b040,0x3d29fffe,0x4082003c,0x4086005c
+	.long 0x7c042800,0x40800008,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x41812f98,0x7c0ea4ae,0x41852f90
+	.long 0x4184002c,0x6ca58000,0x90a10020,0xc8210020
+	.long 0xfc21f828,0x4800001c,0x41852f74,0x6c848000
+	.long 0x90810020,0xc8010020,0xfc00f828,0x7c2e64ae
+	.long 0xfc000800,0x4080ff98,0x4bffff90
+
+	.globl lj_BC_ISGE
+	.hidden lj_BC_ISGE
+	.type lj_BC_ISGE, @function
+	.size lj_BC_ISGE, 172
+lj_BC_ISGE:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7d19602e
+	.long 0x8130fffc,0x7c00b040,0x7cae602e,0x552993ba
+	.long 0x7c88b040,0x3d29fffe,0x4082003c,0x4086005c
+	.long 0x7c042800,0x41800008,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x41812eec,0x7c0ea4ae,0x41852ee4
+	.long 0x4184002c,0x6ca58000,0x90a10020,0xc8210020
+	.long 0xfc21f828,0x4800001c,0x41852ec8,0x6c848000
+	.long 0x90810020,0xc8010020,0xfc00f828,0x7c2e64ae
+	.long 0xfc000800,0x4180ff98,0x4bffff90
+
+	.globl lj_BC_ISLE
+	.hidden lj_BC_ISLE
+	.type lj_BC_ISLE, @function
+	.size lj_BC_ISLE, 176
+lj_BC_ISLE:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7d19602e
+	.long 0x8130fffc,0x7c00b040,0x7cae602e,0x552993ba
+	.long 0x7c88b040,0x3d29fffe,0x4082003c,0x4086005c
+	.long 0x7c042800,0x41810008,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x41812e40,0x7c0ea4ae,0x41852e38
+	.long 0x4184002c,0x6ca58000,0x90a10020,0xc8210020
+	.long 0xfc21f828,0x4800001c,0x41852e1c,0x6c848000
+	.long 0x90810020,0xc8010020,0xfc00f828,0x7c2e64ae
+	.long 0xfc000800,0x4c001382,0x4080ff94,0x4bffff8c
+
+	.globl lj_BC_ISGT
+	.hidden lj_BC_ISGT
+	.type lj_BC_ISGT, @function
+	.size lj_BC_ISGT, 176
+lj_BC_ISGT:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7d19602e
+	.long 0x8130fffc,0x7c00b040,0x7cae602e,0x552993ba
+	.long 0x7c88b040,0x3d29fffe,0x4082003c,0x4086005c
+	.long 0x7c042800,0x40810008,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x41812d90,0x7c0ea4ae,0x41852d88
+	.long 0x4184002c,0x6ca58000,0x90a10020,0xc8210020
+	.long 0xfc21f828,0x4800001c,0x41852d6c,0x6c848000
+	.long 0x90810020,0xc8010020,0xfc00f828,0x7c2e64ae
+	.long 0xfc000800,0x4c001382,0x4180ff94,0x4bffff8c
+
+	.globl lj_BC_ISEQV
+	.hidden lj_BC_ISEQV
+	.type lj_BC_ISEQV, @function
+	.size lj_BC_ISEQV, 208
+lj_BC_ISEQV:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7d19602e
+	.long 0x7c00b040,0x8130fffc,0x7c88b040,0x552993ba
+	.long 0x7cac706e,0x4fa12b82,0x3d29fffe,0x409d0284
+	.long 0x2f80fff5,0x2e88fff5,0x7c0600f8,0x7c004040
+	.long 0x28860002,0x4fdeb382,0x2b06000b,0x419e2dbc
+	.long 0x2b86000c,0x7e842840,0x4c222902,0x4c161342
+	.long 0x4c42b202,0x4f18eb82,0x7e158378,0x4c420b82
+	.long 0x4c000b82,0x40820008,0x7e104a14,0x4080002c
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x4198ffd8,0x81240010
+	.long 0x38c00000,0x28090000,0x4182ffc8,0x89290006
+	.long 0x71290010,0x4082ffbc,0x7eb0ab78,0x48002d24
+
+	.globl lj_BC_ISNEV
+	.hidden lj_BC_ISNEV
+	.type lj_BC_ISNEV, @function
+	.size lj_BC_ISNEV, 208
+lj_BC_ISNEV:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7d19602e
+	.long 0x7c00b040,0x8130fffc,0x7c88b040,0x552993ba
+	.long 0x7cac706e,0x4fa12b82,0x3d29fffe,0x409d0260
+	.long 0x2f80fff5,0x2e88fff5,0x7c0600f8,0x7c004040
+	.long 0x28860002,0x4fdeb382,0x2b06000b,0x419e2cec
+	.long 0x2b86000c,0x7e842840,0x4c222902,0x4c161342
+	.long 0x4c42b202,0x4f18eb82,0x7e158378,0x4c420b82
+	.long 0x4c000b82,0x41820008,0x7e104a14,0x4080002c
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x4198ffd8,0x81240010
+	.long 0x38c00001,0x28090000,0x4182ffc8,0x89290006
+	.long 0x71290010,0x4082ffbc,0x7eb0ab78,0x48002c54
+
+	.globl lj_BC_ISEQS
+	.hidden lj_BC_ISEQS
+	.type lj_BC_ISEQS, @function
+	.size lj_BC_ISEQS, 116
+lj_BC_ISEQS:
+	.long 0x7c19a02e,0x558cf87e,0x7ccea02e,0x81300000
+	.long 0x218cfffc,0x3a100004,0x2c00fff5,0x7d0f602e
+	.long 0x7c0007b4,0x2000fffb,0x41822c40,0x7d064050
+	.long 0x7c004378,0x552993ba,0x20000000,0x3d29fffe
+	.long 0x7d084110,0x7d294078,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_ISNES
+	.hidden lj_BC_ISNES
+	.type lj_BC_ISNES, @function
+	.size lj_BC_ISNES, 116
+lj_BC_ISNES:
+	.long 0x7c19a02e,0x558cf87e,0x7ccea02e,0x81300000
+	.long 0x218cfffc,0x3a100004,0x2c00fff5,0x7d0f602e
+	.long 0x7c0007b4,0x2000fffb,0x41822bcc,0x7d064050
+	.long 0x7c004378,0x552993ba,0x20000000,0x3d29fffe
+	.long 0x7d084110,0x7d294038,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_ISEQN
+	.hidden lj_BC_ISEQN
+	.type lj_BC_ISEQN, @function
+	.size lj_BC_ISEQN, 172
+lj_BC_ISEQN:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7cac786e
+	.long 0x810c0004,0x7c00b040,0x8130fffc,0x7c88b040
+	.long 0x552993ba,0x3d29fffe,0x40820048,0x40860064
+	.long 0x7c042800,0x40820008,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x2c00fff5,0x41822b18,0x4bffffd0
+	.long 0x4080fff4,0x7c0ea4ae,0x41840028,0x6ca58000
+	.long 0x90a10020,0xc8210020,0xfc21f828,0x48000018
+	.long 0x6c848000,0x90810020,0xc8010020,0xfc00f828
+	.long 0xc82c0000,0xfc000800,0x4bffff8c
+
+	.globl lj_BC_ISNEN
+	.hidden lj_BC_ISNEN
+	.type lj_BC_ISNEN, @function
+	.size lj_BC_ISNEN, 172
+lj_BC_ISNEN:
+	.long 0x7c19a02e,0x3a100004,0x7c8ea02e,0x7cac786e
+	.long 0x810c0004,0x7c00b040,0x8130fffc,0x7c88b040
+	.long 0x552993ba,0x3d29fffe,0x40820048,0x40860064
+	.long 0x7c042800,0x41820008,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x2c00fff5,0x41822a6c,0x4bffffcc
+	.long 0x4080fff4,0x7c0ea4ae,0x41840028,0x6ca58000
+	.long 0x90a10020,0xc8210020,0xfc21f828,0x48000018
+	.long 0x6c848000,0x90810020,0xc8010020,0xfc00f828
+	.long 0xc82c0000,0xfc000800,0x4bffff8c
+
+	.globl lj_BC_ISEQP
+	.hidden lj_BC_ISEQP
+	.type lj_BC_ISEQP, @function
+	.size lj_BC_ISEQP, 100
+lj_BC_ISEQP:
+	.long 0x7c19a02e,0x5588e8fe,0x81300000,0x7d0840f8
+	.long 0x3a100004,0x2c00fff5,0x7c080050,0x41822a0c
+	.long 0x552993ba,0x7c0007b4,0x3000ffff,0x3d29fffe
+	.long 0x7d084110,0x7d294038,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_ISNEP
+	.hidden lj_BC_ISNEP
+	.type lj_BC_ISNEP, @function
+	.size lj_BC_ISNEP, 100
+lj_BC_ISNEP:
+	.long 0x7c19a02e,0x5588e8fe,0x81300000,0x7d0840f8
+	.long 0x3a100004,0x2c00fff5,0x7c080050,0x418229a8
+	.long 0x552993ba,0x7c0007b4,0x3000ffff,0x3d29fffe
+	.long 0x7d084110,0x7d294078,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_ISTC
+	.hidden lj_BC_ISTC
+	.type lj_BC_ISTC, @function
+	.size lj_BC_ISTC, 84
+lj_BC_ISTC:
+	.long 0x7c19602e,0x80f00000,0x3a100004,0x3900fffe
+	.long 0x7c0e64ae,0x7c004040,0x40800014,0x3e10fffe
+	.long 0x54e993ba,0x7c0ea5ae,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_ISFC
+	.hidden lj_BC_ISFC
+	.type lj_BC_ISFC, @function
+	.size lj_BC_ISFC, 84
+lj_BC_ISFC:
+	.long 0x7c19602e,0x80f00000,0x3a100004,0x3900fffe
+	.long 0x7c0e64ae,0x7c004040,0x41800014,0x3e10fffe
+	.long 0x54e993ba,0x7c0ea5ae,0x7e104a14,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_IST
+	.hidden lj_BC_IST
+	.type lj_BC_IST, @function
+	.size lj_BC_IST, 80
+lj_BC_IST:
+	.long 0x7c19602e,0x80f00000,0x3a100004,0x7c0007b4
+	.long 0x2000fffd,0x54e993ba,0x7d084110,0x3d29fffe
+	.long 0x7d294078,0x7e104a14,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_ISF
+	.hidden lj_BC_ISF
+	.type lj_BC_ISF, @function
+	.size lj_BC_ISF, 80
+lj_BC_ISF:
+	.long 0x7c19602e,0x80f00000,0x3a100004,0x7c0007b4
+	.long 0x2000fffd,0x54e993ba,0x7d084110,0x3d29fffe
+	.long 0x7d294038,0x7e104a14,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_ISTYPE
+	.hidden lj_BC_ISTYPE
+	.type lj_BC_ISTYPE, @function
+	.size lj_BC_ISTYPE, 60
+lj_BC_ISTYPE:
+	.long 0x7c19a02e,0x5588e8fe,0x80f00000,0x3a100004
+	.long 0x7d0800d0,0x7c004000,0x4082281c,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_ISNUM
+	.hidden lj_BC_ISNUM
+	.type lj_BC_ISNUM, @function
+	.size lj_BC_ISNUM, 52
+lj_BC_ISNUM:
+	.long 0x7c19a02e,0x80f00000,0x3a100004,0x7c00b040
+	.long 0x408027e8,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_MOV
+	.hidden lj_BC_MOV
+	.type lj_BC_MOV, @function
+	.size lj_BC_MOV, 48
+lj_BC_MOV:
+	.long 0x80f00000,0x3a100004,0x7c0e64ae,0x7c0ea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_NOT
+	.hidden lj_BC_NOT
+	.type lj_BC_NOT, @function
+	.size lj_BC_NOT, 60
+lj_BC_NOT:
+	.long 0x80f00000,0x3a100004,0x7c19602e,0x7c0007b4
+	.long 0x2100fffd,0x7c004114,0x7c19a12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_UNM
+	.hidden lj_BC_UNM
+	.type lj_BC_UNM, @function
+	.size lj_BC_UNM, 120
+lj_BC_UNM:
+	.long 0x7d19602e,0x7c0e602e,0x7c08b040,0x40820050
+	.long 0x3d208000,0x7c0000d0,0x7c004840,0x41820034
+	.long 0x80f00000,0x3a100004,0x7ed9a12e,0x7c0ea12e
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x3d0041e0,0x38000000,0x4800000c,0x40802734
+	.long 0x6d088000,0x80f00000,0x3a100004,0x7d19a12e
+	.long 0x7c0ea12e,0x4bffffbc
+
+	.globl lj_BC_LEN
+	.hidden lj_BC_LEN
+	.type lj_BC_LEN, @function
+	.size lj_BC_LEN, 84
+lj_BC_LEN:
+	.long 0x7c19602e,0x7c6e602e,0x2c00fffb,0x40820038
+	.long 0x8063000c,0x80f00000,0x3a100004,0x7ed9a12e
+	.long 0x7c6ea12e,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x2c00fff4,0x40822738
+	bl lj_tab_len
+	.long 0x4bffffc4
+
+	.globl lj_BC_ADDVN
+	.hidden lj_BC_ADDVN
+	.type lj_BC_ADDVN, @function
+	.size lj_BC_ADDVN, 140
+lj_BC_ADDVN:
+	.long 0x7c8b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c6a706e,0x7f0103a6,0x7c89b040,0x4082004c
+	.long 0x40860048,0x786007c6,0x788607c6,0x7c003615
+	.long 0x7c632214,0x418326b4,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7c6ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xc9ca0000,0x4c002202
+	.long 0xc9eb0000,0x40802674,0xfc0e782a,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_SUBVN
+	.hidden lj_BC_SUBVN
+	.type lj_BC_SUBVN, @function
+	.size lj_BC_SUBVN, 140
+lj_BC_SUBVN:
+	.long 0x7c8b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c6a706e,0x7f0103a6,0x7c89b040,0x4082004c
+	.long 0x40860048,0x786007c6,0x788607c6,0x7c060451
+	.long 0x7c641850,0x41832628,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7c6ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xc9ca0000,0x4c002202
+	.long 0xc9eb0000,0x408025e8,0xfc0e7828,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_MULVN
+	.hidden lj_BC_MULVN
+	.type lj_BC_MULVN, @function
+	.size lj_BC_MULVN, 128
+lj_BC_MULVN:
+	.long 0x7c8b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c6a706e,0x7f0103a6,0x7c89b040,0x40820040
+	.long 0x4086003c,0x7c6325d7,0x418325a8,0x80f00000
+	.long 0x3a100004,0x7ed9a12e,0x7c6ea12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0xc9ca0000
+	.long 0x4c002202,0xc9eb0000,0x40802568,0xfc0e03f2
+	.long 0x80f00000,0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_DIVVN
+	.hidden lj_BC_DIVVN
+	.type lj_BC_DIVVN, @function
+	.size lj_BC_DIVVN, 84
+lj_BC_DIVVN:
+	.long 0x392b0004,0x7d19502e,0x7d2f482e,0x7dce54ae
+	.long 0x7def5cae,0x7c08b040,0x7c89b040,0x4c002202
+	.long 0x40802518,0xfc0e7824,0x80f00000,0x3a100004
+	.long 0x7c0ea5ae,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_MODVN
+	.hidden lj_BC_MODVN
+	.type lj_BC_MODVN, @function
+	.size lj_BC_MODVN, 144
+lj_BC_MODVN:
+	.long 0x7c8b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c6a706e,0x7f0103a6,0x7c89b040,0x40820040
+	.long 0x4086003c,0x48003a49,0x418324d4,0x80f00000
+	.long 0x3a100004,0x7ed9a12e,0x7c6ea12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0xc9ca0000
+	.long 0x4c002202,0xc9eb0000,0x40802494,0xfc2e7824
+	bl floor
+	.long 0x60000000,0xfc0103f2,0xfc0e0028,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffb0
+
+	.globl lj_BC_ADDNV
+	.hidden lj_BC_ADDNV
+	.type lj_BC_ADDNV, @function
+	.size lj_BC_ADDNV, 140
+lj_BC_ADDNV:
+	.long 0x7c6b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c8a706e,0x7f0103a6,0x7c89b040,0x4082004c
+	.long 0x40860048,0x786007c6,0x788607c6,0x7c003615
+	.long 0x7c632214,0x41832408,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7c6ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xc9ea0000,0x4c002202
+	.long 0xc9cb0000,0x408023c8,0xfc0e782a,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_SUBNV
+	.hidden lj_BC_SUBNV
+	.type lj_BC_SUBNV, @function
+	.size lj_BC_SUBNV, 140
+lj_BC_SUBNV:
+	.long 0x7c6b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c8a706e,0x7f0103a6,0x7c89b040,0x4082004c
+	.long 0x40860048,0x786007c6,0x788607c6,0x7c060451
+	.long 0x7c641850,0x4183237c,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7c6ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xc9ea0000,0x4c002202
+	.long 0xc9cb0000,0x4080233c,0xfc0e7828,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_MULNV
+	.hidden lj_BC_MULNV
+	.type lj_BC_MULNV, @function
+	.size lj_BC_MULNV, 128
+lj_BC_MULNV:
+	.long 0x7c6b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c8a706e,0x7f0103a6,0x7c89b040,0x40820040
+	.long 0x4086003c,0x7c6325d7,0x418322fc,0x80f00000
+	.long 0x3a100004,0x7ed9a12e,0x7c6ea12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0xc9ea0000
+	.long 0x4c002202,0xc9cb0000,0x408022bc,0xfc0e03f2
+	.long 0x80f00000,0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_DIVNV
+	.hidden lj_BC_DIVNV
+	.type lj_BC_DIVNV, @function
+	.size lj_BC_DIVNV, 84
+lj_BC_DIVNV:
+	.long 0x392b0004,0x7d19502e,0x7d2f482e,0x7dee54ae
+	.long 0x7dcf5cae,0x7c08b040,0x7c89b040,0x4c002202
+	.long 0x40802278,0xfc0e7824,0x80f00000,0x3a100004
+	.long 0x7c0ea5ae,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_MODNV
+	.hidden lj_BC_MODNV
+	.type lj_BC_MODNV, @function
+	.size lj_BC_MODNV, 112
+lj_BC_MODNV:
+	.long 0x7c6b786e,0x7d0ac82e,0x812b0004,0x7c08b040
+	.long 0x7c8a706e,0x7f0103a6,0x7c89b040,0x40820040
+	.long 0x4086003c,0x480037cd,0x41832228,0x80f00000
+	.long 0x3a100004,0x7ed9a12e,0x7c6ea12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0xc9ea0000
+	.long 0x4c002202,0xc9cb0000,0x408021e8,0x4bfffd84
+
+	.globl lj_BC_ADDVV
+	.hidden lj_BC_ADDVV
+	.type lj_BC_ADDVV, @function
+	.size lj_BC_ADDVV, 140
+lj_BC_ADDVV:
+	.long 0x7d0ac82e,0x7d2bc82e,0x7c6a706e,0x7c08b040
+	.long 0x7c8b706e,0x7f0103a6,0x7c89b040,0x4082004c
+	.long 0x40860048,0x786007c6,0x788607c6,0x7c003615
+	.long 0x7c632214,0x418321dc,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7c6ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xc9ca0000,0x4c002202
+	.long 0xc9eb0000,0x4080219c,0xfc0e782a,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_SUBVV
+	.hidden lj_BC_SUBVV
+	.type lj_BC_SUBVV, @function
+	.size lj_BC_SUBVV, 140
+lj_BC_SUBVV:
+	.long 0x7d0ac82e,0x7d2bc82e,0x7c6a706e,0x7c08b040
+	.long 0x7c8b706e,0x7f0103a6,0x7c89b040,0x4082004c
+	.long 0x40860048,0x786007c6,0x788607c6,0x7c060451
+	.long 0x7c641850,0x41832150,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7c6ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xc9ca0000,0x4c002202
+	.long 0xc9eb0000,0x40802110,0xfc0e7828,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_MULVV
+	.hidden lj_BC_MULVV
+	.type lj_BC_MULVV, @function
+	.size lj_BC_MULVV, 128
+lj_BC_MULVV:
+	.long 0x7d0ac82e,0x7d2bc82e,0x7c6a706e,0x7c08b040
+	.long 0x7c8b706e,0x7f0103a6,0x7c89b040,0x40820040
+	.long 0x4086003c,0x7c6325d7,0x418320d0,0x80f00000
+	.long 0x3a100004,0x7ed9a12e,0x7c6ea12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0xc9ca0000
+	.long 0x4c002202,0xc9eb0000,0x40802090,0xfc0e03f2
+	.long 0x80f00000,0x3a100004,0x7c0ea5ae,0x4bffffc0
+
+	.globl lj_BC_DIVVV
+	.hidden lj_BC_DIVVV
+	.type lj_BC_DIVVV, @function
+	.size lj_BC_DIVVV, 80
+lj_BC_DIVVV:
+	.long 0x7d19502e,0x7d39582e,0x7dce54ae,0x7dee5cae
+	.long 0x7c08b040,0x7c89b040,0x4c002202,0x40802050
+	.long 0xfc0e7824,0x80f00000,0x3a100004,0x7c0ea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_MODVV
+	.hidden lj_BC_MODVV
+	.type lj_BC_MODVV, @function
+	.size lj_BC_MODVV, 112
+lj_BC_MODVV:
+	.long 0x7d0ac82e,0x7d2bc82e,0x7c6a706e,0x7c08b040
+	.long 0x7c8b706e,0x7f0103a6,0x7c89b040,0x40820040
+	.long 0x4086003c,0x48003575,0x41832000,0x80f00000
+	.long 0x3a100004,0x7ed9a12e,0x7c6ea12e,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0xc9ca0000
+	.long 0x4c002202,0xc9eb0000,0x40801fc0,0x4bfffb2c
+
+	.globl lj_BC_POW
+	.hidden lj_BC_POW
+	.type lj_BC_POW, @function
+	.size lj_BC_POW, 84
+lj_BC_POW:
+	.long 0x7d19502e,0x7c2e54ae,0x7d39582e,0x7c4e5cae
+	.long 0x7c08b040,0x7c89b040,0x4c002202,0x40801f90
+	bl pow
+	.long 0x60000000,0x80f00000,0x3a100004,0x7c2ea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_CAT
+	.hidden lj_BC_CAT
+	.type lj_BC_CAT, @function
+	.size lj_BC_CAT, 96
+lj_BC_CAT:
+	.long 0x7caa5850,0xf9d20010,0x7c8e5a14,0x7d555378
+	.long 0x9201015c,0x7e439378,0x54a5e8fe
+	bl lj_meta_cat
+	.long 0x28030000,0xe9d20010,0x3b2e0004,0x40821f60
+	.long 0x80f00000,0x3a100004,0x7c0eacae,0x7c0ea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_KSTR
+	.hidden lj_BC_KSTR
+	.type lj_BC_KSTR, @function
+	.size lj_BC_KSTR, 64
+lj_BC_KSTR:
+	.long 0x5588f87e,0x2108fffc,0x80f00000,0x3a100004
+	.long 0x7c0f402e,0x3920fffb,0x7d39a12e,0x7c0ea12e
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_KCDATA
+	.hidden lj_BC_KCDATA
+	.type lj_BC_KCDATA, @function
+	.size lj_BC_KCDATA, 64
+lj_BC_KCDATA:
+	.long 0x5588f87e,0x2108fffc,0x80f00000,0x3a100004
+	.long 0x7c0f402e,0x3920fff5,0x7d39a12e,0x7c0ea12e
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_KSHORT
+	.hidden lj_BC_KSHORT
+	.type lj_BC_KSHORT, @function
+	.size lj_BC_KSHORT, 56
+lj_BC_KSHORT:
+	.long 0x558c6824,0x7d8c8670,0x80f00000,0x3a100004
+	.long 0x7ed9a12e,0x7d8ea12e,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420
+
+	.globl lj_BC_KNUM
+	.hidden lj_BC_KNUM
+	.type lj_BC_KNUM, @function
+	.size lj_BC_KNUM, 48
+lj_BC_KNUM:
+	.long 0x80f00000,0x3a100004,0x7c0f64ae,0x7c0ea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_KPRI
+	.hidden lj_BC_KPRI
+	.type lj_BC_KPRI, @function
+	.size lj_BC_KPRI, 52
+lj_BC_KPRI:
+	.long 0x5588e8fe,0x7d0040f8,0x80f00000,0x3a100004
+	.long 0x7c19a12e,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_KNIL
+	.hidden lj_BC_KNIL
+	.type lj_BC_KNIL, @function
+	.size lj_BC_KNIL, 64
+lj_BC_KNIL:
+	.long 0x7ef9a12e,0x3a940008,0x7ef9a12e,0x7c146000
+	.long 0x3a940008,0x4180fff4,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_UGET
+	.hidden lj_BC_UGET
+	.type lj_BC_UGET, @function
+	.size lj_BC_UGET, 68
+lj_BC_UGET:
+	.long 0x814efff8,0x558cf87e,0x398c0014,0x7d4a602e
+	.long 0x80f00000,0x3a100004,0x810a0010,0xc8080000
+	.long 0x7c0ea5ae,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_USETV
+	.hidden lj_BC_USETV
+	.type lj_BC_USETV, @function
+	.size lj_BC_USETV, 136
+lj_BC_USETV:
+	.long 0x814efff8,0x5694f87e,0x3a940014,0x7c0c74ee
+	.long 0x7d4aa02e,0x88ca0004,0x808a0010,0x70c60004
+	.long 0x880a0006,0x812c0004,0xd8040000,0x28800000
+	.long 0x810c0000,0x4c423382,0x3929000d,0x4082002c
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x28090009,0x4080ffd4
+	.long 0x88c80004,0x70c60003,0x3871fe60,0x4182ffc4
+	bl lj_gc_barrieruv
+	.long 0x4bffffbc
+
+	.globl lj_BC_USETS
+	.hidden lj_BC_USETS
+	.type lj_BC_USETS, @function
+	.size lj_BC_USETS, 132
+lj_BC_USETS:
+	.long 0x814efff8,0x5588f87e,0x5694f87e,0x2108fffc
+	.long 0x3a940014,0x7d0f402e,0x7d4aa02e,0x88ca0004
+	.long 0x808a0010,0x70c60004,0x88c80004,0x892a0006
+	.long 0x3800fffb,0x91040000,0x90040004,0x4082002c
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x70c60003,0x28890000
+	.long 0x4c423382,0x3871fe60,0x4182ffc8
+	bl lj_gc_barrieruv
+	.long 0x4bffffc0
+
+	.globl lj_BC_USETN
+	.hidden lj_BC_USETN
+	.type lj_BC_USETN, @function
+	.size lj_BC_USETN, 68
+lj_BC_USETN:
+	.long 0x814efff8,0x5694f87e,0x3a940014,0x7c0f64ae
+	.long 0x7d4aa02e,0x80f00000,0x3a100004,0x810a0010
+	.long 0xd8080000,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_USETP
+	.hidden lj_BC_USETP
+	.type lj_BC_USETP, @function
+	.size lj_BC_USETP, 72
+lj_BC_USETP:
+	.long 0x814efff8,0x5694f87e,0x5580e8fe,0x3a940014
+	.long 0x7c0000f8,0x7d4aa02e,0x80f00000,0x3a100004
+	.long 0x810a0010,0x90080004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420
+
+	.globl lj_BC_UCLO
+	.hidden lj_BC_UCLO
+	.type lj_BC_UCLO, @function
+	.size lj_BC_UCLO, 88
+lj_BC_UCLO:
+	.long 0x81120028,0x5580f87e,0x3e10fffe,0x7e100214
+	.long 0xf9d20010,0x28080000,0x7e439378,0x41820014
+	.long 0x7c8ea214
+	bl lj_func_closeuv
+	.long 0xe9d20010,0x3b2e0004,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_FNEW
+	.hidden lj_BC_FNEW
+	.type lj_BC_FNEW, @function
+	.size lj_BC_FNEW, 92
+lj_BC_FNEW:
+	.long 0x5588f87e,0xf9d20010,0x2108fffc,0x9201015c
+	.long 0x7c8f402e,0x7e439378,0x80aefff8
+	bl lj_func_newL_gc
+	.long 0xe9d20010,0x3800fff7,0x3b2e0004,0x7c19a12e
+	.long 0x7c6ea12e,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_TNEW
+	.hidden lj_BC_TNEW
+	.type lj_BC_TNEW, @function
+	.size lj_BC_TNEW, 136
+lj_BC_TNEW:
+	.long 0x8011fe80,0x7e439378,0x8111fe84,0xf9d20010
+	.long 0x7c004040,0x9201015c,0x4080005c,0x5584ed7e
+	.long 0x558596fe,0x2c0407ff,0x41820044
+	bl lj_tab_new
+	.long 0xe9d20010,0x3800fff4,0x3b2e0004,0x7c19a12e
+	.long 0x7c6ea12e,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0x38800801
+	.long 0x4bffffbc,0x7d956378
+	bl lj_gc_step_fixtop
+	.long 0x7eacab78,0x7e439378,0x4bffff98
+
+	.globl lj_BC_TDUP
+	.hidden lj_BC_TDUP
+	.type lj_BC_TDUP, @function
+	.size lj_BC_TDUP, 124
+lj_BC_TDUP:
+	.long 0x8011fe80,0x7e439378,0x8111fe84,0xf9d20010
+	.long 0x7c004040,0x9201015c,0x40800050,0x5588f87e
+	.long 0x2108fffc,0x7c8f402e
+	bl lj_tab_dup
+	.long 0xe9d20010,0x3800fff4,0x3b2e0004,0x7c19a12e
+	.long 0x7c6ea12e,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0x7d956378
+	bl lj_gc_step_fixtop
+	.long 0x7eacab78,0x7e439378,0x4bffffa4
+
+	.globl lj_BC_GGET
+	.hidden lj_BC_GGET
+	.type lj_BC_GGET, @function
+	.size lj_BC_GGET, 24
+lj_BC_GGET:
+	.long 0x812efff8,0x5588f87e,0x81490008,0x2108fffc
+	.long 0x7d6f402e,0x480000d0
+
+	.globl lj_BC_GSET
+	.hidden lj_BC_GSET
+	.type lj_BC_GSET, @function
+	.size lj_BC_GSET, 24
+lj_BC_GSET:
+	.long 0x812efff8,0x5588f87e,0x81490008,0x2108fffc
+	.long 0x7d6f402e,0x48000300
+
+	.globl lj_BC_TGETV
+	.hidden lj_BC_TGETV
+	.type lj_BC_TGETV, @function
+	.size lj_BC_TGETV, 152
+lj_BC_TGETV:
+	.long 0x7c79502e,0x7c99582e,0x7d4e502e,0x7d6e582e
+	.long 0x2c03fff4,0x7c84b040,0x4082171c,0x800a0018
+	.long 0x4086006c,0x810a0008,0x7c005840,0x55691838
+	.long 0x40811704,0x7dc84cee,0x80080004,0x2c00ffff
+	.long 0x41820030,0x80f00000,0x3a100004,0x7dcea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x812a0010,0x28090000,0x4182ffcc,0x88090006
+	.long 0x70000001,0x4082ffc0,0x480016ac,0x2c04fffb
+	.long 0x408216a4,0x48000020
+
+	.globl lj_BC_TGETS
+	.hidden lj_BC_TGETS
+	.type lj_BC_TGETS, @function
+	.size lj_BC_TGETS, 192
+lj_BC_TGETS:
+	.long 0x7c79502e,0x5568f87e,0x7d4e502e,0x2108fffc
+	.long 0x2c03fff4,0x7d6f402e,0x4082162c,0x800a001c
+	.long 0x810b0008,0x812a0014,0x7d080038,0x55002834
+	.long 0x55081838,0x7d080050,0x7d294214,0x8069000c
+	.long 0x80090008,0x80890004,0x81090000,0x2c03fffb
+	.long 0x40820044,0x7c005800,0x4082003c,0x2c04ffff
+	.long 0x41820044,0x7c99a12e,0x7d0ea12e,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x81290010,0x28090000,0x4082ffa0
+	.long 0x3880ffff,0x812a0010,0x28090000,0x4182ffb8
+	.long 0x88090006,0x70000001,0x4082ffac,0x480015a4
+
+	.globl lj_BC_TGETB
+	.hidden lj_BC_TGETB
+	.type lj_BC_TGETB, @function
+	.size lj_BC_TGETB, 124
+lj_BC_TGETB:
+	.long 0x7c79502e,0x5560e8fe,0x7d4e502e,0x2c03fff4
+	.long 0x408215b4,0x810a0018,0x812a0008,0x7c004040
+	.long 0x408015a4,0x7c095cee,0x81090004,0x2c08ffff
+	.long 0x41820030,0x80f00000,0x3a100004,0x7c0ea5ae
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x812a0010,0x28090000,0x4182ffcc,0x89290006
+	.long 0x71290001,0x4082ffc0,0x4800154c
+
+	.globl lj_BC_TGETR
+	.hidden lj_BC_TGETR
+	.type lj_BC_TGETR, @function
+	.size lj_BC_TGETR, 76
+lj_BC_TGETR:
+	.long 0x7c6e502e,0x80030018,0x7c8e582e,0x81030008
+	.long 0x7c002040,0x54891838,0x408115bc,0x7dc84cae
+	.long 0x80f00000,0x3a100004,0x7dcea5ae,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_TSETV
+	.hidden lj_BC_TSETV
+	.type lj_BC_TSETV, @function
+	.size lj_BC_TSETV, 192
+lj_BC_TSETV:
+	.long 0x7c79502e,0x7c99582e,0x7d4e502e,0x7d6e582e
+	.long 0x2c03fff4,0x7c84b040,0x408215e4,0x800a0018
+	.long 0x4086007c,0x810a0008,0x7c005840,0x55601838
+	.long 0x408115cc,0x39280004,0x7d29002e,0x88ca0004
+	.long 0x7dcea4ae,0x2c09ffff,0x41820038,0x70c90004
+	.long 0x7dc805ae,0x40820054,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x812a0010,0x28090000,0x4182ffc4,0x89290006
+	.long 0x71290002,0x4082ffb8,0x48001564,0x2c04fffb
+	.long 0x4082155c,0x48000038,0x8011fe9c,0x54c607b8
+	.long 0x9151fe9c,0x98ca0004,0x900a000c,0x4bffff9c
+
+	.globl lj_BC_TSETS
+	.hidden lj_BC_TSETS
+	.type lj_BC_TSETS, @function
+	.size lj_BC_TSETS, 304
+lj_BC_TSETS:
+	.long 0x7c79502e,0x5568f87e,0x7d4e502e,0x2108fffc
+	.long 0x2c03fff4,0x7d6f402e,0x408214cc,0x800a001c
+	.long 0x810b0008,0x812a0014,0x9b0a0006,0x7d080038
+	.long 0x7dcea4ae,0x55002834,0x55081838,0x7d080050
+	.long 0x88ca0004,0x7d294214,0x8069000c,0x80090008
+	.long 0x80890004,0x81090010,0x2c03fffb,0x40820064
+	.long 0x7c005800,0x4082005c,0x2c04ffff,0x41820038
+	.long 0x70c00004,0xd9c90000,0x408200a0,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x810a0010,0x28080000,0x4182ffc4
+	.long 0x88080006,0x70000002,0x4082ffb8,0x48001444
+	.long 0x28080000,0x7d094378,0x4082ff80,0x810a0010
+	.long 0x38b1fef0,0x9201015c,0x7e439378,0x28080000
+	.long 0xf9d20010,0x41820010,0x88080006,0x70000002
+	.long 0x41821410,0x3800fffb,0x91650000,0x7d445378
+	.long 0x90050004
+	bl lj_tab_newkey
+	.long 0xe9d20010,0xd9c30000,0x3b2e0004,0x4bffff68
+	.long 0x8011fe9c,0x54c607b8,0x9151fe9c,0x98ca0004
+	.long 0x900a000c,0x4bffff50
+
+	.globl lj_BC_TSETB
+	.hidden lj_BC_TSETB
+	.type lj_BC_TSETB, @function
+	.size lj_BC_TSETB, 164
+lj_BC_TSETB:
+	.long 0x7c79502e,0x5560e8fe,0x7d4e502e,0x2c03fff4
+	.long 0x408213e4,0x810a0018,0x812a0008,0x88ca0004
+	.long 0x7c004040,0x7dcea4ae,0x408013cc,0x39090004
+	.long 0x7d08582e,0x2c08ffff,0x41820038,0x70c00004
+	.long 0x7dc95dae,0x40820048,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x810a0010,0x28080000,0x4182ffc4,0x89080006
+	.long 0x71080002,0x4082ffb8,0x4800136c,0x8011fe9c
+	.long 0x54c607b8,0x9151fe9c,0x98ca0004,0x900a000c
+	.long 0x4bffffa8
+
+	.globl lj_BC_TSETM
+	.hidden lj_BC_TSETM
+	.type lj_BC_TSETM, @function
+	.size lj_BC_TSETM, 188
+lj_BC_TSETM:
+	.long 0x7e8ea214,0x7ccf6214,0x8094fff8,0x3413fff8
+	.long 0x80c60000,0x5405e8fe,0x41820048,0x7ca53214
+	.long 0x81240018,0x54c81838,0x88c40004,0x7c054840
+	.long 0x7d340214,0x80040008,0x41810050,0x7d080214
+	.long 0x70c00004,0xc8140000,0x3a940008,0x7c944800
+	.long 0xd8080000,0x39080008,0x4184ffec,0x40820048
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0xf9d20010,0x7e439378
+	.long 0x9201015c,0x7d956378
+	bl lj_tab_reasize
+	.long 0x7eacab78,0x4bffff64,0x8011fe9c,0x54c607b8
+	.long 0x9091fe9c,0x98c40004,0x9004000c,0x4bffffa8
+
+	.globl lj_BC_TSETR
+	.hidden lj_BC_TSETR
+	.type lj_BC_TSETR, @function
+	.size lj_BC_TSETR, 112
+lj_BC_TSETR:
+	.long 0x7c8e502e,0x88c40004,0x80040018,0x7cae582e
+	.long 0x81040008,0x70c90004,0x40820040,0x7c002840
+	.long 0x54a91838,0x7dcea4ae,0x408112fc,0x80f00000
+	.long 0x3a100004,0x7dc84dae,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x8131fe9c,0x54c607b8
+	.long 0x9091fe9c,0x98c40004,0x9124000c,0x4bffffb0
+
+	.globl lj_BC_CALLM
+	.hidden lj_BC_CALLM
+	.type lj_BC_CALLM, @function
+	.size lj_BC_CALLM, 4
+lj_BC_CALLM:
+	.long 0x7d6b9a14
+
+	.globl lj_BC_CALL
+	.hidden lj_BC_CALL
+	.type lj_BC_CALL, @function
+	.size lj_BC_CALL, 72
+lj_BC_CALL:
+	.long 0x7dc97378,0x7d4ea06e,0x800e0004,0x396bfff8
+	.long 0x39ce0008,0x2c00fff7,0x40821444,0x920efffc
+	.long 0x3b2e0004,0x820a0010,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x54f4dd78,0x7c11402a,0x7e947214
+	.long 0x7c0903a6,0x4e800420
+
+	.globl lj_BC_CALLMT
+	.hidden lj_BC_CALLMT
+	.type lj_BC_CALLMT, @function
+	.size lj_BC_CALLMT, 4
+lj_BC_CALLMT:
+	.long 0x7d6b9a14
+
+	.globl lj_BC_CALLT
+	.hidden lj_BC_CALLT
+	.type lj_BC_CALLT, @function
+	.size lj_BC_CALLT, 188
+lj_BC_CALLT:
+	.long 0x7d54706e,0x80140004,0x396bfff8,0x810efffc
+	.long 0x2c00fff7,0x3a940008,0x40821448,0x71000003
+	.long 0x88ca0006,0x69090003,0x288b0000,0x40820078
+	.long 0x914efff8,0x39200000,0x2b860001,0x4186001c
+	.long 0x38c90008,0x7c144cae,0x7c865840,0x7c0e4dae
+	.long 0x7cc93378,0x4086ffec,0x4c42ea02,0x4182002c
+	.long 0x3b2e0004,0x820a0010,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x54f4dd78,0x7c11402a,0x7e947214
+	.long 0x7c0903a6,0x4e800420,0x80e8fffc,0x54f4dd78
+	.long 0x7d147050,0x8108fff0,0x81080010,0x81e8ffd0
+	.long 0x4bffffc0,0x71200007,0x4082ff88,0x7dc97050
+	.long 0x810efffc,0x71000003,0x4bffff78
+
+	.globl lj_BC_ITERC
+	.hidden lj_BC_ITERC
+	.type lj_BC_ITERC, @function
+	.size lj_BC_ITERC, 96
+lj_BC_ITERC:
+	.long 0x7dc97378,0x7dcea214,0x810effec,0x814effe8
+	.long 0xc82efff8,0xc80efff0,0x910e0004,0x914e0000
+	.long 0x2c08fff7,0xd82e0010,0x39600010,0xdc0e0008
+	.long 0x40821324,0x920efffc,0x3b2e0004,0x820a0010
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x54f4dd78
+	.long 0x7c11402a,0x7e947214,0x7c0903a6,0x4e800420
+
+	.globl lj_BC_ITERN
+	.hidden lj_BC_ITERN
+	.type lj_BC_ITERN, @function
+	.size lj_BC_ITERN, 236
+lj_BC_ITERN:
+	.long 0x7e8ea214,0x8154fff0,0x8174fff8,0x800a0018
+	.long 0x810a0008,0x3a100004,0x7c0b0040,0x55661838
+	.long 0x40800068,0x7c0644ee,0x81260004,0x2c09ffff
+	.long 0x80f0fffc,0x4182004c,0x91740000,0x92d40004
+	.long 0x396b0001,0x3cd0fffe,0xd8140008,0x54e893ba
+	.long 0x9174fff8,0x7e083214,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x396b0001,0x4bffff94,0x810a001c,0x7d605850
+	.long 0x812a0014,0x7c0b4040,0x55662834,0x41a1ffbc
+	.long 0x556a1838,0x7cca3050,0x7c064cee,0x81460004
+	.long 0x2c0affff,0x80f0fffc,0x4182002c,0xc8260008
+	.long 0x3d30fffe,0xd8140008,0x7d6b0214,0x54e893ba
+	.long 0xd8340000,0x396b0001,0x7e084a14,0x9174fff8
+	.long 0x4bffff78,0x396b0001,0x4bffffac
+
+	.globl lj_BC_VARG
+	.hidden lj_BC_VARG
+	.type lj_BC_VARG, @function
+	.size lj_BC_VARG, 248
+lj_BC_VARG:
+	.long 0x800efffc,0x7d6e5a14,0x7e8ea214,0x396b0003
+	.long 0x7d345214,0x38cefff8,0x7d605850,0x288a0000
+	.long 0x7d0b3051,0x41860064,0x3929fff0,0x40810024
+	.long 0xc80b0000,0x396b0008,0xd8140000,0x7c144840
+	.long 0x7c8b3040,0x4080001c,0x3a940008,0x4184ffe4
+	.long 0x92f40004,0x7c144840,0x3a940008,0x4180fff4
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x80120020,0x3a600008
+	.long 0x40a1ffd0,0x7d344214,0x7c090040,0x3a680008
+	.long 0x41810020,0xc80b0000,0x396b0008,0xd8140000
+	.long 0x7c0b3040,0x3a940008,0x4180ffec,0x4bffffa4
+	.long 0x7e439378,0xfa920018,0x7eae5850,0xf9d20010
+	.long 0x7e8ea050,0x9201015c,0x5504e8fe
+	bl lj_state_growstack
+	.long 0xe9d20010,0x7e8ea214,0x7d6eaa14,0x38cefff8
+	.long 0x3b2e0004,0x4bffffb0
+
+	.globl lj_BC_ISNEXT
+	.hidden lj_BC_ISNEXT
+	.type lj_BC_ISNEXT, @function
+	.size lj_BC_ISNEXT, 148
+lj_BC_ISNEXT:
+	.long 0x7e8ea214,0x8014ffec,0x8114ffe8,0x8134fff4
+	.long 0x80d4fffc,0x2c09fff4,0x2c80fff7,0x2f06ffff
+	.long 0x4086005c,0x89080006,0x4c42d202,0x2f880004
+	.long 0x5580f87e,0x4c42f202,0x7cd00214,0x40820040
+	.long 0x3d00fffe,0x61087fff,0x9314fff8,0x9114fffc
+	.long 0x3e06fffe,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0x38000058
+	.long 0x39000045,0x9810fffc,0x3e06fffe,0x99100000
+	.long 0x4bffffc4
+
+	.globl lj_BC_RETM
+	.hidden lj_BC_RETM
+	.type lj_BC_RETM, @function
+	.size lj_BC_RETM, 4
+lj_BC_RETM:
+	.long 0x7d8c9a14
+
+	.globl lj_BC_RET
+	.hidden lj_BC_RET
+	.type lj_BC_RET, @function
+	.size lj_BC_RET, 200
+lj_BC_RET:
+	.long 0x820efffc,0x7e8ea214,0x7d936378,0x72000003
+	.long 0x6a080003,0x408200a0,0x80f0fffc,0x2c0c0008
+	.long 0x392efff8,0x396cfff8,0x54ea5d78,0x41820030
+	.long 0x39000000,0x38c80008,0x7c1444ae,0x7c065800
+	.long 0x7c0945ae,0x41820018,0x39060008,0x7c3434ae
+	.long 0x7c085800,0x7c2935ae,0x4082ffdc,0x7c0a6040
+	.long 0x54f4dd78,0x41810040,0x7dd44850,0x810efff8
+	.long 0x3b2e0004,0x80f00000,0x3a100004,0x81080010
+	.long 0x81e8ffd0,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x390cfffc,0x398c0008,0x7ee9412e
+	.long 0x4bffffac,0x71090007,0x40820528,0x7dc87050
+	.long 0x820efffc,0x4bffff48
+
+	.globl lj_BC_RET0
+	.hidden lj_BC_RET0
+	.type lj_BC_RET0, @function
+	.size lj_BC_RET0, 124
+lj_BC_RET0:
+	.long 0x820efffc,0x7e8ea214,0x7d936378,0x72000003
+	.long 0x6a080003,0x40a2ffd8,0x80f0fffc,0x392efff8
+	.long 0x54ea5d78,0x7c0a6040,0x54f4dd78,0x41810040
+	.long 0x7dd44850,0x810efff8,0x3b2e0004,0x80f00000
+	.long 0x3a100004,0x81080010,0x81e8ffd0,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420,0x390cfffc
+	.long 0x398c0008,0x7ee9412e,0x4bffffac
+
+	.globl lj_BC_RET1
+	.hidden lj_BC_RET1
+	.type lj_BC_RET1, @function
+	.size lj_BC_RET1, 132
+lj_BC_RET1:
+	.long 0x820efffc,0x7e8ea214,0x7d936378,0x72000003
+	.long 0x6a080003,0x40a2ff5c,0x80f0fffc,0x392efff8
+	.long 0x54ea5d78,0xc8140000,0xd8090000,0x7c0a6040
+	.long 0x54f4dd78,0x41810040,0x7dd44850,0x810efff8
+	.long 0x3b2e0004,0x80f00000,0x3a100004,0x81080010
+	.long 0x81e8ffd0,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x390cfffc,0x398c0008,0x7ee9412e
+	.long 0x4bffffac
+
+	.globl lj_BC_FORI
+	.hidden lj_BC_FORI
+	.type lj_BC_FORI, @function
+	.size lj_BC_FORI, 192
+lj_BC_FORI:
+	.long 0x7c74706e,0x81140004,0x7c08b040,0x80d40014
+	.long 0x80b40010,0x8134000c,0x80940008,0x7f86b040
+	.long 0x7c89b040,0x4c42f202,0x4c423202,0x2f050000
+	.long 0x40820050,0x41980044,0x7c032000,0x92d4001c
+	.long 0x558cf87e,0x90740018,0x7d906214,0x4181006c
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x7c041800,0x4bffffc0
+	.long 0xc8340000,0x4c00e202,0x4c002202,0xc8540008
+	.long 0x40800e9c,0x2f060000,0x558cf87e,0xd8340018
+	.long 0x7d906214,0xfc011000,0x4198000c,0x4181000c
+	.long 0x4bffffa0,0x4080ff9c,0x3e0cfffe,0x4bffff94
+
+	.globl lj_BC_FORL
+	.hidden lj_BC_FORL
+	.type lj_BC_FORL, @function
+	.size lj_BC_FORL, 204
+lj_BC_FORL:
+	.long 0x7c74706e,0x81140004,0x7f0103a6,0x7c08b040
+	.long 0x80b40010,0x40820074,0x786007c6,0x78a907c6
+	.long 0x7c632a14,0x7c004e15,0x2f050000,0x80940008
+	.long 0x41830028,0x90740000,0x41980048,0x7c032000
+	.long 0x92d4001c,0x558cf87e,0x90740018,0x7d906214
+	.long 0x41810008,0x3e0cfffe,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x7c041800,0x4bffffbc,0xc8340000,0xc8740010
+	.long 0xc8540008,0x80d40014,0xfc21182a,0xd8340000
+	.long 0x2f060000,0x558cf87e,0xd8340018,0x7d906214
+	.long 0xfc011000,0x41980010,0x41a1ffa0,0x3e0cfffe
+	.long 0x4bffff98,0x40a0fff8,0x4bffff90
+
+	.globl lj_BC_ITERL
+	.hidden lj_BC_ITERL
+	.type lj_BC_ITERL, @function
+	.size lj_BC_ITERL, 76
+lj_BC_ITERL:
+	.long 0x7d34706e,0x81140004,0x2c08ffff,0x41820018
+	.long 0x5580f87e,0x3e10fffe,0x7e100214,0x9114fffc
+	.long 0x9134fff8,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x7c11402a,0x7c0903a6,0x54ea5d78,0x54ec9b78
+	.long 0x54f4dd78,0x54eb9d78,0x4e800420
+
+	.globl lj_BC_LOOP
+	.hidden lj_BC_LOOP
+	.type lj_BC_LOOP, @function
+	.size lj_BC_LOOP, 40
+lj_BC_LOOP:
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420
+
+	.globl lj_BC_JMP
+	.hidden lj_BC_JMP
+	.type lj_BC_JMP, @function
+	.size lj_BC_JMP, 52
+lj_BC_JMP:
+	.long 0x5580f87e,0x3e10fffe,0x7e100214,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420
+
+	.globl lj_BC_FUNCF
+	.hidden lj_BC_FUNCF
+	.type lj_BC_FUNCF, @function
+	.size lj_BC_FUNCF, 0
+lj_BC_FUNCF:
+
+	.globl lj_BC_IFUNCF
+	.hidden lj_BC_IFUNCF
+	.type lj_BC_IFUNCF, @function
+	.size lj_BC_IFUNCF, 84
+lj_BC_IFUNCF:
+	.long 0x81320020,0x8910ffc2,0x81f0ffcc,0x7c144840
+	.long 0x55081838,0x418103c0,0x80f00000,0x3a100004
+	.long 0x7c0b4040,0x41800024,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x7ef9592e,0x396b0008
+	.long 0x4bffffd0
+
+	.globl lj_BC_JFUNCF
+	.hidden lj_BC_JFUNCF
+	.type lj_BC_JFUNCF, @function
+	.size lj_BC_JFUNCF, 0
+lj_BC_JFUNCF:
+
+	.globl lj_BC_FUNCV
+	.hidden lj_BC_FUNCV
+	.type lj_BC_FUNCV, @function
+	.size lj_BC_FUNCV, 0
+lj_BC_FUNCV:
+
+	.globl lj_BC_IFUNCV
+	.hidden lj_BC_IFUNCV
+	.type lj_BC_IFUNCV, @function
+	.size lj_BC_IFUNCV, 156
+lj_BC_IFUNCV:
+	.long 0x81320020,0x7d0e5a14,0x7c145a14,0x91480000
+	.long 0x38cb000b,0x81f0ffcc,0x7c004840,0x90c80004
+	.long 0x40800360,0x8930ffc2,0x7dd47378,0x7d0b4378
+	.long 0x80f00000,0x3a100004,0x2c090000,0x39c80008
+	.long 0x41820030,0x7c145840,0x80140004,0x80d40000
+	.long 0x40800044,0x92f40004,0x3a940008,0x3529ffff
+	.long 0x9008000c,0x90c80008,0x39080008,0x4082ffd8
+	.long 0x3b2e0004,0x54e81d78,0x7c11402a,0x7c0903a6
+	.long 0x54ea5d78,0x54ec9b78,0x54f4dd78,0x54eb9d78
+	.long 0x4e800420,0x3800ffff,0x4bffffc4
+
+	.globl lj_BC_JFUNCV
+	.hidden lj_BC_JFUNCV
+	.type lj_BC_JFUNCV, @function
+	.size lj_BC_JFUNCV, 0
+lj_BC_JFUNCV:
+
+	.globl lj_BC_FUNCC
+	.hidden lj_BC_FUNCC
+	.type lj_BC_FUNCC, @function
+	.size lj_BC_FUNCC, 92
+lj_BC_FUNCC:
+	.long 0xe98a0018,0x7d145a14,0x81320020,0x7d6e5a14
+	.long 0xf9d20010,0x7c084840,0xf9720018,0x3800fffe
+	.long 0x7d8903a6,0x7e439378,0x418102b4,0x9011feb8
+	.long 0x4e800421,0xe8410018,0xe9d20010,0x546c1838
+	.long 0xe9120018,0x3800ffff,0x820efffc,0x9251ff58
+	.long 0x7e8c4050,0x9011feb8,0x48000080
+
+	.globl lj_BC_FUNCCW
+	.hidden lj_BC_FUNCCW
+	.type lj_BC_FUNCCW, @function
+	.size lj_BC_FUNCCW, 96
+lj_BC_FUNCCW:
+	.long 0xe991ff40,0x7d145a14,0x81320020,0x7d6e5a14
+	.long 0xf9d20010,0x7c084840,0xf9720018,0x3800fffe
+	.long 0x7d8903a6,0xe88a0018,0x7e439378,0x41810254
+	.long 0x9011feb8,0x4e800421,0xe8410018,0xe9d20010
+	.long 0x546c1838,0xe9120018,0x3800ffff,0x820efffc
+	.long 0x9251ff58,0x7e8c4050,0x9011feb8,0x48000020
+
+	.globl lj_vm_returnp
+	.hidden lj_vm_returnp
+	.type lj_vm_returnp, @function
+	.size lj_vm_returnp, 28
+lj_vm_returnp:
+	.long 0x72000004,0x3900fffd,0x418206e0,0x8209fffc
+	.long 0x7d2e4b78,0x3a94fff8,0x91140004
+
+	.globl lj_vm_returnc
+	.hidden lj_vm_returnc
+	.type lj_vm_returnc, @function
+	.size lj_vm_returnc, 28
+lj_vm_returnc:
+	.long 0x398c0008,0x72000003,0x2c8c0000,0x38600001
+	.long 0x4186017c,0x7d936378,0x4182fa3c
+
+	.globl lj_vm_return
+	.hidden lj_vm_return
+	.type lj_vm_return, @function
+	.size lj_vm_return, 84
+lj_vm_return:
+	.long 0x2c000001,0x56090038,0x3800fffe,0x7d297050
+	.long 0x40a2ffb8,0x350cfff8,0xf9320010,0x81210164
+	.long 0x39cefff8,0x9011feb8,0x55291838,0x4182001c
+	.long 0x3508fff8,0xc8140000,0x3a940008,0xd80e0000
+	.long 0x39ce0008,0x40a2ffec,0x7c096000,0x408200bc
+	.long 0xf9d20018
+
+	.globl lj_vm_leave_cp
+	.hidden lj_vm_leave_cp
+	.type lj_vm_leave_cp, @function
+	.size lj_vm_leave_cp, 12
+lj_vm_leave_cp:
+	.long 0xe8010150,0x38600000,0xf8120030
+
+	.globl lj_vm_leave_unw
+	.hidden lj_vm_leave_unw
+	.type lj_vm_leave_unw, @function
+	.size lj_vm_leave_unw, 264
+lj_vm_leave_unw:
+	.long 0xe8010180,0xe9810178,0xe9c10030,0xc9c100c0
+	.long 0xe9e10038,0xc9e100c8,0xea010040,0xca0100d0
+	.long 0xea210048,0xca2100d8,0xea410050,0xca4100e0
+	.long 0xea610058,0xca6100e8,0x7c0803a6,0x7d838120
+	.long 0xea810060,0xca8100f0,0xeaa10068,0xcaa100f8
+	.long 0xeac10070,0xcac10100,0xeae10078,0xcae10108
+	.long 0xeb010080,0xcb010110,0xeb210088,0xcb210118
+	.long 0xeb410090,0xcb410120,0xeb610098,0xcb610128
+	.long 0xeb8100a0,0xcb810130,0xeba100a8,0xcba10138
+	.long 0xebc100b0,0xcbc10140,0xebe100b8,0xcbe10148
+	.long 0x38210170,0x4e800020,0x40810020,0x81120020
+	.long 0x7c0e4040,0x4080002c,0x92ee0004,0x398c0008
+	.long 0x39ce0008,0x4bffff24,0x20c90000,0x7c096050
+	.long 0x7d084110,0x7c004038,0x7dc07050,0x4bffff14
+	.long 0xf9d20018,0x7d956378,0x5524e8fe,0x7e439378
+	bl lj_state_growstack
+	.long 0x81210164,0x7eacab78,0x55291838,0xe9d20018
+	.long 0x4bfffee4
+
+	.globl lj_vm_unwind_c
+	.hidden lj_vm_unwind_c
+	.type lj_vm_unwind_c, @function
+	.size lj_vm_unwind_c, 8
+lj_vm_unwind_c:
+	.long 0x7c611b78,0x7c832378
+
+	.globl lj_vm_unwind_c_eh
+	.hidden lj_vm_unwind_c_eh
+	.type lj_vm_unwind_c_eh, @function
+	.size lj_vm_unwind_c_eh, 24
+lj_vm_unwind_c_eh:
+	.long 0x82410160,0xe8410018,0x3800fffe,0x81120008
+	.long 0x90080058,0x4bfffedc
+
+	.globl lj_vm_unwind_ff
+	.hidden lj_vm_unwind_ff
+	.type lj_vm_unwind_ff, @function
+	.size lj_vm_unwind_ff, 4
+lj_vm_unwind_ff:
+	.long 0x78610764
+
+	.globl lj_vm_unwind_ff_eh
+	.hidden lj_vm_unwind_ff_eh
+	.type lj_vm_unwind_ff_eh, @function
+	.size lj_vm_unwind_ff_eh, 92
+lj_vm_unwind_ff_eh:
+	.long 0x82410160,0xe8410018,0x3ec0fffe,0x62d6ffff
+	.long 0xe9d20010,0x3cc059c0,0x82320008,0x3b000000
+	.long 0x90c10028,0x3900fffe,0x60c60004,0x3ae0ffff
+	.long 0x3800ffff,0xc3c10028,0x820efffc,0x3a8efff8
+	.long 0x90c10028,0x3a3101a0,0x91140004,0x39800010
+	.long 0x9011feb8,0xc3e10028,0x4bfffe00
+
+	.globl lj_vm_growstack_c
+	.hidden lj_vm_growstack_c
+	.type lj_vm_growstack_c, @function
+	.size lj_vm_growstack_c, 8
+lj_vm_growstack_c:
+	.long 0x38800014,0x4800001c
+
+	.globl lj_vm_growstack_l
+	.hidden lj_vm_growstack_l
+	.type lj_vm_growstack_l, @function
+	.size lj_vm_growstack_l, 92
+lj_vm_growstack_l:
+	.long 0x7d6e5a14,0x7e8ea050,0xf9d20010,0x3a100004
+	.long 0xf9720018,0x5684e8fe,0x9201015c,0x7e439378
+	bl lj_state_growstack
+	.long 0xe9d20010,0xe9720018,0x814efff8,0x7d6e5850
+	.long 0x3b2e0004,0x820a0010,0x80f00000,0x3a100004
+	.long 0x54e81d78,0x54f4dd78,0x7c11402a,0x7e947214
+	.long 0x7c0903a6,0x4e800420
+
+	.globl lj_vm_resume
+	.hidden lj_vm_resume
+	.type lj_vm_resume, @function
+	.size lj_vm_resume, 332
+lj_vm_resume:
+	.long 0xf821fe91,0xf9c10030,0xd9c100c0,0xf9e10038
+	.long 0xd9e100c8,0xfa010040,0xda0100d0,0x7c0802a6
+	.long 0xfa210048,0xda2100d8,0xfa410050,0xda4100e0
+	.long 0xfa610058,0xda6100e8,0xfa810060,0xda8100f0
+	.long 0xfaa10068,0xdaa100f8,0xfac10070,0xdac10100
+	.long 0xf8010180,0xfae10078,0xdae10108,0xfb010080
+	.long 0xdb010110,0xfb210088,0xdb210118,0x7c000026
+	.long 0xfb410090,0xdb410120,0xfb610098,0xdb610128
+	.long 0xfb8100a0,0xdb810130,0xfba100a8,0xdba10138
+	.long 0xfbc100b0,0xdbc10140,0xfbe100b8,0xdbe10148
+	.long 0xf8010178,0xf8410018,0x7c721b78,0x82320008
+	.long 0x7c8e2378,0x89120007,0x92410160,0x3a000005
+	.long 0x38010001,0x3a3101a0,0x90a10164,0x28080000
+	.long 0x90a10168,0xf8a10150,0x9061015c,0xf8120030
+	.long 0x418201f4,0x9251ff58,0x7dd47378,0xe9d20010
+	.long 0x3ec0fffe,0x62d6ffff,0xe9120018,0x820efffc
+	.long 0x3cc059c0,0x98b20007,0x90c10028,0x60c60004
+	.long 0xc3c10028,0x7d8e4050,0x90c10028,0x3c004338
+	.long 0x398c0008,0x90010024,0x3800ffff,0x3b000000
+	.long 0x9011feb8,0x72000003,0x7d936378,0xc3e10028
+	.long 0x3ae0ffff,0x4182f6a8,0x4bfffc6c
+
+	.globl lj_vm_pcall
+	.hidden lj_vm_pcall
+	.type lj_vm_pcall, @function
+	.size lj_vm_pcall, 180
+lj_vm_pcall:
+	.long 0xf821fe91,0xf9c10030,0xd9c100c0,0xf9e10038
+	.long 0xd9e100c8,0xfa010040,0xda0100d0,0x7c0802a6
+	.long 0xfa210048,0xda2100d8,0xfa410050,0xda4100e0
+	.long 0xfa610058,0xda6100e8,0xfa810060,0xda8100f0
+	.long 0xfaa10068,0xdaa100f8,0xfac10070,0xdac10100
+	.long 0xf8010180,0xfae10078,0xdae10108,0xfb010080
+	.long 0xdb010110,0xfb210088,0xdb210118,0x7c000026
+	.long 0xfb410090,0xdb410120,0xfb610098,0xdb610128
+	.long 0xfb8100a0,0xdb810130,0xfba100a8,0xdba10138
+	.long 0xfbc100b0,0xdbc10140,0xfbe100b8,0xdbe10148
+	.long 0xf8010178,0xf8410018,0x3a000005,0x90c10168
+	.long 0x480000b0
+
+	.globl lj_vm_call
+	.hidden lj_vm_call
+	.type lj_vm_call, @function
+	.size lj_vm_call, 292
+lj_vm_call:
+	.long 0xf821fe91,0xf9c10030,0xd9c100c0,0xf9e10038
+	.long 0xd9e100c8,0xfa010040,0xda0100d0,0x7c0802a6
+	.long 0xfa210048,0xda2100d8,0xfa410050,0xda4100e0
+	.long 0xfa610058,0xda6100e8,0xfa810060,0xda8100f0
+	.long 0xfaa10068,0xdaa100f8,0xfac10070,0xdac10100
+	.long 0xf8010180,0xfae10078,0xdae10108,0xfb010080
+	.long 0xdb010110,0xfb210088,0xdb210118,0x7c000026
+	.long 0xfb410090,0xdb410120,0xfb610098,0xdb610128
+	.long 0xfb8100a0,0xdb810130,0xfba100a8,0xdba10138
+	.long 0xfbc100b0,0xdbc10140,0xfbe100b8,0xdbe10148
+	.long 0xf8010178,0xf8410018,0x3a000001,0xe9030030
+	.long 0x7c721b78,0x90a10164,0x82320008,0x90610160
+	.long 0x7c8e2378,0x3a3101a0,0x9061015c,0xf9010150
+	.long 0xf8320030,0x9251ff58,0xe9320010,0x3ec0fffe
+	.long 0x62d6ffff,0xe9120018,0x3cc059c0,0x7e107214
+	.long 0x90c10028,0x3b000000,0x60c60004,0xc3c10028
+	.long 0x7e098050,0x90c10028,0x3c004338,0x7d6e4050
+	.long 0x90010024,0x3800ffff,0xc3e10028,0x3ae0ffff
+	.long 0x9011feb8
+
+	.globl lj_vm_call_dispatch
+	.hidden lj_vm_call_dispatch
+	.type lj_vm_call_dispatch, @function
+	.size lj_vm_call_dispatch, 16
+lj_vm_call_dispatch:
+	.long 0x800efffc,0x814efff8,0x2c00fff7,0x4082051c
+
+	.globl lj_vm_call_dispatch_f
+	.hidden lj_vm_call_dispatch_f
+	.type lj_vm_call_dispatch_f, @function
+	.size lj_vm_call_dispatch_f, 44
+lj_vm_call_dispatch_f:
+	.long 0x920efffc,0x3b2e0004,0x820a0010,0x80f00000
+	.long 0x3a100004,0x54e81d78,0x54f4dd78,0x7c11402a
+	.long 0x7e947214,0x7c0903a6,0x4e800420
+
+	.globl lj_vm_cpcall
+	.hidden lj_vm_cpcall
+	.type lj_vm_cpcall, @function
+	.size lj_vm_cpcall, 260
+lj_vm_cpcall:
+	.long 0xf821fe91,0xf9c10030,0xd9c100c0,0xf9e10038
+	.long 0xd9e100c8,0xfa010040,0xda0100d0,0x7c0802a6
+	.long 0xfa210048,0xda2100d8,0xfa410050,0xda4100e0
+	.long 0xfa610058,0xda6100e8,0xfa810060,0xda8100f0
+	.long 0xfaa10068,0xdaa100f8,0xfac10070,0xdac10100
+	.long 0xf8010180,0xfae10078,0xdae10108,0xfb010080
+	.long 0xdb010110,0xfb210088,0xdb210118,0x7c000026
+	.long 0xfb410090,0xdb410120,0xfb610098,0xdb610128
+	.long 0xfb8100a0,0xdb810130,0xfba100a8,0xdba10138
+	.long 0xfbc100b0,0xdbc10140,0xfbe100b8,0xdbe10148
+	.long 0xf8010178,0xf8410018,0x7c721b78,0x80030024
+	.long 0x90610160,0xe9120018,0x82320008,0x9061015c
+	.long 0x7c080050,0xe9120030,0x3a3101a0,0x39200000
+	.long 0x90010164,0x91210168,0xf9010150,0xf8320030
+	.long 0x9251ff58,0x7cc903a6,0x7ccc3378,0x4e800421
+	.long 0xe8410018,0x7c6e1b79,0x3a000005,0x4082fe78
+	.long 0x4bfff9a8
+
+	.globl lj_cont_dispatch
+	.hidden lj_cont_dispatch
+	.type lj_cont_dispatch, @function
+	.size lj_cont_dispatch, 80
+lj_cont_dispatch:
+	.long 0x800efff0,0x7dca7378,0x7d2e4b78,0x8109fff8
+	.long 0x28000001,0x820afff4,0x3b2e0004,0x392cfffc
+	.long 0x81080010,0x7ef4492e,0xe8d10000,0x40810014
+	.long 0x7c003214,0x81e8ffd0,0x7c0903a6,0x4e800420
+	.long 0x41821ae8,0x390afff0,0x7d6e4050,0x48001744
+
+	.globl lj_cont_cat
+	.hidden lj_cont_cat
+	.type lj_cont_cat, @function
+	.size lj_cont_cat, 52
+lj_cont_cat:
+	.long 0x80f0fffc,0x388afff0,0x54f55d78,0xc8140000
+	.long 0x7d0eaa14,0xf9d20010,0x7c082040,0x7ca82050
+	.long 0x54f4dd78,0xd8040000,0x40a2e3c0,0x7c0ea5ae
+	.long 0x48000214
+
+	.globl lj_vmeta_tgets1
+	.hidden lj_vmeta_tgets1
+	.type lj_vmeta_tgets1, @function
+	.size lj_vmeta_tgets1, 28
+lj_vmeta_tgets1:
+	.long 0x38b1fef0,0x3800fffb,0x54ea5d78,0x91650000
+	.long 0x7c8e5214,0x90050004,0x48000050
+
+	.globl lj_vmeta_tgets
+	.hidden lj_vmeta_tgets
+	.type lj_vmeta_tgets, @function
+	.size lj_vmeta_tgets, 36
+lj_vmeta_tgets:
+	.long 0x3891fef0,0x3800fff4,0x91440000,0x38b1fef8
+	.long 0x90040004,0x3900fffb,0x91650000,0x91050004
+	.long 0x4800002c
+
+	.globl lj_vmeta_tgetb
+	.hidden lj_vmeta_tgetb
+	.type lj_vmeta_tgetb, @function
+	.size lj_vmeta_tgetb, 24
+lj_vmeta_tgetb:
+	.long 0x54ea5d78,0x38b1fef0,0x7c8e5214,0x92c50004
+	.long 0x90050000,0x48000014
+
+	.globl lj_vmeta_tgetv
+	.hidden lj_vmeta_tgetv
+	.type lj_vmeta_tgetv, @function
+	.size lj_vmeta_tgetv, 116
+lj_vmeta_tgetv:
+	.long 0x54ea5d78,0x54eb9d78,0x7c8e5214,0x7cae5a14
+	.long 0xf9d20010,0x7e439378,0x9201015c
+	bl lj_meta_tget
+	.long 0x28030000,0x41820034,0xc8030000,0x80f00000
+	.long 0x3a100004,0x7c0ea5ae,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x210e0002,0xe9d20018
+	.long 0x920efff4,0x7e087214,0x814efff8,0x39600010
+	.long 0x4bfffd84
+
+	.globl lj_vmeta_tgetr
+	.hidden lj_vmeta_tgetr
+	.type lj_vmeta_tgetr, @function
+	.size lj_vmeta_tgetr, 28
+lj_vmeta_tgetr:
+	bl lj_tab_getinth
+	.long 0x28030000,0x4182000c,0xc9c30000,0x4bffea3c
+	.long 0x7ef9a12e,0x4800012c
+
+	.globl lj_vmeta_tsets1
+	.hidden lj_vmeta_tsets1
+	.type lj_vmeta_tsets1, @function
+	.size lj_vmeta_tsets1, 28
+lj_vmeta_tsets1:
+	.long 0x38b1fef0,0x3800fffb,0x54ea5d78,0x91650000
+	.long 0x7c8e5214,0x90050004,0x48000050
+
+	.globl lj_vmeta_tsets
+	.hidden lj_vmeta_tsets
+	.type lj_vmeta_tsets, @function
+	.size lj_vmeta_tsets, 36
+lj_vmeta_tsets:
+	.long 0x3891fef0,0x3800fff4,0x91440000,0x38b1fef8
+	.long 0x90040004,0x3900fffb,0x91650000,0x91050004
+	.long 0x4800002c
+
+	.globl lj_vmeta_tsetb
+	.hidden lj_vmeta_tsetb
+	.type lj_vmeta_tsetb, @function
+	.size lj_vmeta_tsetb, 24
+lj_vmeta_tsetb:
+	.long 0x54ea5d78,0x38b1fef0,0x7c8e5214,0x92c50004
+	.long 0x90050000,0x48000014
+
+	.globl lj_vmeta_tsetv
+	.hidden lj_vmeta_tsetv
+	.type lj_vmeta_tsetv, @function
+	.size lj_vmeta_tsetv, 120
+lj_vmeta_tsetv:
+	.long 0x54ea5d78,0x54eb9d78,0x7c8e5214,0x7cae5a14
+	.long 0xf9d20010,0x7e439378,0x9201015c
+	bl lj_meta_tset
+	.long 0x28030000,0x7c0ea4ae,0x41820030,0x80f00000
+	.long 0x3a100004,0xd8030000,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420,0x210e0002,0xe9d20018
+	.long 0x920efff4,0x7e087214,0x814efff8,0x39600018
+	.long 0xd80e0010,0x4bfffc98
+
+	.globl lj_vmeta_tsetr
+	.hidden lj_vmeta_tsetr
+	.type lj_vmeta_tsetr, @function
+	.size lj_vmeta_tsetr, 20
+lj_vmeta_tsetr:
+	.long 0xf9d20010,0x9201015c
+	bl lj_tab_setinth
+	.long 0xd9c30000,0x48000048
+
+	.globl lj_vmeta_comp
+	.hidden lj_vmeta_comp
+	.type lj_vmeta_comp, @function
+	.size lj_vmeta_comp, 68
+lj_vmeta_comp:
+	.long 0x7e439378,0x3a10fffc,0x7c8ea214,0x9201015c
+	.long 0x7cae6214,0xf9d20010,0x54e6063e
+	bl lj_meta_comp
+	.long 0x28030001,0x41810140,0x20630000,0x80f00000
+	.long 0x3a100004,0x54e993ba,0x3d29fffe,0x7d291838
+	.long 0x7e104a14
+
+	.globl lj_cont_nop
+	.hidden lj_cont_nop
+	.type lj_cont_nop, @function
+	.size lj_cont_nop, 40
+lj_cont_nop:
+	.long 0x80f00000,0x3a100004,0x54e81d78,0x7c11402a
+	.long 0x7c0903a6,0x54ea5d78,0x54ec9b78,0x54f4dd78
+	.long 0x54eb9d78,0x4e800420
+
+	.globl lj_cont_ra
+	.hidden lj_cont_ra
+	.type lj_cont_ra, @function
+	.size lj_cont_ra, 20
+lj_cont_ra:
+	.long 0x80f0fffc,0xc8140000,0x54e8dd78,0x7c0e45ae
+	.long 0x4bffffc8
+
+	.globl lj_cont_condt
+	.hidden lj_cont_condt
+	.type lj_cont_condt, @function
+	.size lj_cont_condt, 24
+lj_cont_condt:
+	.long 0x80140004,0x7c0007b4,0x2000fffd,0x7c631910
+	.long 0x7c6318f8,0x4bffff98
+
+	.globl lj_cont_condf
+	.hidden lj_cont_condf
+	.type lj_cont_condf, @function
+	.size lj_cont_condf, 20
+lj_cont_condf:
+	.long 0x80140004,0x7c0007b4,0x2000fffd,0x7c631910
+	.long 0x4bffff84
+
+	.globl lj_vmeta_equal
+	.hidden lj_vmeta_equal
+	.type lj_vmeta_equal, @function
+	.size lj_vmeta_equal, 24
+lj_vmeta_equal:
+	.long 0x3a10fffc,0xf9d20010,0x7e439378,0x9201015c
+	bl lj_meta_equal
+	.long 0x4bffff60
+
+	.globl lj_vmeta_equal_cd
+	.hidden lj_vmeta_equal_cd
+	.type lj_vmeta_equal_cd, @function
+	.size lj_vmeta_equal_cd, 28
+lj_vmeta_equal_cd:
+	.long 0x7ce43b78,0x3a10fffc,0xf9d20010,0x7e439378
+	.long 0x9201015c
+	bl lj_meta_equal_cd
+	.long 0x4bffff44
+
+	.globl lj_vmeta_istype
+	.hidden lj_vmeta_istype
+	.type lj_vmeta_istype, @function
+	.size lj_vmeta_istype, 32
+lj_vmeta_istype:
+	.long 0x3a10fffc,0xf9d20010,0x5684e8fe,0x7e439378
+	.long 0x5585e8fe,0x9201015c
+	bl lj_meta_istype
+	.long 0x4bffff48
+
+	.globl lj_vmeta_arith_nv
+	.hidden lj_vmeta_arith_nv
+	.type lj_vmeta_arith_nv, @function
+	.size lj_vmeta_arith_nv, 12
+lj_vmeta_arith_nv:
+	.long 0x7caf5a14,0x7cce5214,0x4800003c
+
+	.globl lj_vmeta_arith_nv2
+	.hidden lj_vmeta_arith_nv2
+	.type lj_vmeta_arith_nv2, @function
+	.size lj_vmeta_arith_nv2, 12
+lj_vmeta_arith_nv2:
+	.long 0x7d655b78,0x7d465378,0x48000030
+
+	.globl lj_vmeta_unm
+	.hidden lj_vmeta_unm
+	.type lj_vmeta_unm, @function
+	.size lj_vmeta_unm, 12
+lj_vmeta_unm:
+	.long 0x7cae6214,0x7cce6214,0x48000024
+
+	.globl lj_vmeta_arith_vn
+	.hidden lj_vmeta_arith_vn
+	.type lj_vmeta_arith_vn, @function
+	.size lj_vmeta_arith_vn, 12
+lj_vmeta_arith_vn:
+	.long 0x7cae5214,0x7ccf5a14,0x48000018
+
+	.globl lj_vmeta_arith_vv
+	.hidden lj_vmeta_arith_vv
+	.type lj_vmeta_arith_vv, @function
+	.size lj_vmeta_arith_vv, 12
+lj_vmeta_arith_vv:
+	.long 0x7cae5214,0x7cce5a14,0x4800000c
+
+	.globl lj_vmeta_arith_vn2
+	.hidden lj_vmeta_arith_vn2
+	.type lj_vmeta_arith_vn2, @function
+	.size lj_vmeta_arith_vn2, 0
+lj_vmeta_arith_vn2:
+
+	.globl lj_vmeta_arith_vv2
+	.hidden lj_vmeta_arith_vv2
+	.type lj_vmeta_arith_vv2, @function
+	.size lj_vmeta_arith_vv2, 40
+lj_vmeta_arith_vv2:
+	.long 0x7d455378,0x7d665b78,0x7c8ea214,0xf9d20010
+	.long 0x7e439378,0x9201015c,0x54e7063e
+	bl lj_meta_arith
+	.long 0x28030000,0x4182fee4
+
+	.globl lj_vmeta_binop
+	.hidden lj_vmeta_binop
+	.type lj_vmeta_binop, @function
+	.size lj_vmeta_binop, 28
+lj_vmeta_binop:
+	.long 0x7d0e1850,0x9203fff4,0x7dc97378,0x3a080002
+	.long 0x7c6e1b78,0x39600010,0x4bfffaf4
+
+	.globl lj_vmeta_len
+	.hidden lj_vmeta_len
+	.type lj_vmeta_len, @function
+	.size lj_vmeta_len, 24
+lj_vmeta_len:
+	.long 0x7c8e6214,0xf9d20010,0x7e439378,0x9201015c
+	bl lj_meta_len
+	.long 0x4bffffd0
+
+	.globl lj_vmeta_call
+	.hidden lj_vmeta_call
+	.type lj_vmeta_call, @function
+	.size lj_vmeta_call, 80
+lj_vmeta_call:
+	.long 0x7e439378,0xf9320010,0x388efff8,0x9201015c
+	.long 0x7cae5a14,0x7d755b78
+	bl lj_meta_call
+	.long 0x814efff8,0x39750008,0x920efffc,0x3b2e0004
+	.long 0x820a0010,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x54f4dd78,0x7c11402a,0x7e947214,0x7c0903a6
+	.long 0x4e800420
+
+	.globl lj_vmeta_callt
+	.hidden lj_vmeta_callt
+	.type lj_vmeta_callt, @function
+	.size lj_vmeta_callt, 44
+lj_vmeta_callt:
+	.long 0x7e439378,0xf9d20010,0x3894fff8,0x9201015c
+	.long 0x7cb45a14,0x7d755b78
+	bl lj_meta_call
+	.long 0x810efffc,0x39750008,0x8154fff8,0x4bffeb94
+
+	.globl lj_vmeta_for
+	.hidden lj_vmeta_for
+	.type lj_vmeta_for, @function
+	.size lj_vmeta_for, 36
+lj_vmeta_for:
+	.long 0x7e439378,0xf9d20010,0x7e84a378,0x9201015c
+	.long 0x7cf53b78
+	bl lj_meta_for
+	.long 0x56b4dd78,0x56ac9b78,0x4bfff0b4
+
+	.globl lj_ff_assert
+	.hidden lj_ff_assert
+	.type lj_ff_assert, @function
+	.size lj_ff_assert, 84
+lj_ff_assert:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41801278
+	.long 0x3900fffe,0x3a8efff8,0x7c854040,0x820efffc
+	.long 0x40841264,0x90b40004,0x398b0008,0x90740000
+	.long 0x4182071c,0x39000008,0x396bfff8,0x7c085840
+	.long 0x7c0e44ae,0x7c1445ae,0x39080008,0x40a2fff0
+	.long 0x480006fc
+
+	.globl lj_ff_type
+	.hidden lj_ff_type
+	.type lj_ff_type, @function
+	.size lj_ff_type, 72
+lj_ff_type:
+	.long 0x280b0008,0x806e0004,0x41801228,0x7c6307b4
+	.long 0x3800fff2,0x7c667e70,0x7d001810,0x7d231910
+	.long 0x2c06fffe,0x7d284338,0x7d004050,0x41820014
+	.long 0x55081838,0x392a0020,0x7c2944ae,0x480011b4
+	.long 0x39000018,0x4bfffff0
+
+	.globl lj_ff_getmetatable
+	.hidden lj_ff_getmetatable
+	.type lj_ff_getmetatable, @function
+	.size lj_ff_getmetatable, 216
+lj_ff_getmetatable:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x418011dc
+	.long 0x2c05fff4,0x40820080,0x80630010,0x38a0ffff
+	.long 0x28030000,0x8171ffa8,0x41820674,0x8003001c
+	.long 0x38a0fff4,0x810b0008,0x81230014,0x7d080038
+	.long 0x55002834,0x55081838,0x7d080050,0x7d294214
+	.long 0x80c9000c,0x80090008,0x80890004,0x81090000
+	.long 0x2c06fffb,0x4082000c,0x7c005800,0x41820014
+	.long 0x81290010,0x28090000,0x41820624,0x4bffffd4
+	.long 0x2c04ffff,0x41820618,0x7c852378,0x7d034378
+	.long 0x4800060c,0x2c05fff3,0x4182ff80,0x7ca507b4
+	.long 0x3800fff2,0x7ca67e70,0x7d002810,0x7d252910
+	.long 0x2c06fffe,0x7d284338,0x7d004050,0x41820014
+	.long 0x5508103a,0x3931ffbc,0x7c69402e,0x4bffff50
+	.long 0x3900000c,0x4bfffff0
+
+	.globl lj_ff_setmetatable
+	.hidden lj_ff_setmetatable
+	.type lj_ff_setmetatable, @function
+	.size lj_ff_setmetatable, 92
+lj_ff_setmetatable:
+	.long 0x280b0010,0x80ae0004,0x80ce000c,0x806e0000
+	.long 0x808e0008,0x418010fc,0x2c05fff4,0x408210f4
+	.long 0x81030010,0x2c06fff4,0x408210e8,0x28080000
+	.long 0x88c30004,0x408210dc,0x70c00004,0x90830010
+	.long 0x41820584,0x8011fe9c,0x54c607b8,0x9071fe9c
+	.long 0x98c30004,0x9003000c,0x4800056c
+
+	.globl lj_ff_rawget
+	.hidden lj_ff_rawget
+	.type lj_ff_rawget, @function
+	.size lj_ff_rawget, 44
+lj_ff_rawget:
+	.long 0x280b0010,0x80ce0004,0x808e0000,0x418010a8
+	.long 0x2c06fff4,0x408210a0,0x38ae0008,0x7e439378
+	bl lj_tab_get
+	.long 0xc8230000,0x4800104c
+
+	.globl lj_ff_tonumber
+	.hidden lj_ff_tonumber
+	.type lj_ff_tonumber, @function
+	.size lj_ff_tonumber, 28
+lj_ff_tonumber:
+	.long 0x280b0008,0x806e0004,0xc82e0000,0x4082107c
+	.long 0x7c03b040,0x41811074,0x48001030
+
+	.globl lj_ff_tostring
+	.hidden lj_ff_tostring
+	.type lj_ff_tostring, @function
+	.size lj_ff_tostring, 88
+lj_ff_tostring:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41801060
+	.long 0x2c05fffb,0x4182050c,0x8011fff0,0x7c05b040
+	.long 0x28800000,0xf9d20010,0x4c413342,0x9201015c
+	.long 0x4182103c,0x8011fe80,0x8111fe84,0x7c004040
+	.long 0x408010e5,0x7e439378,0x7dc47378
+	bl lj_strfmt_number
+	.long 0x38a0fffb,0x480004cc
+
+	.globl lj_ff_next
+	.hidden lj_ff_next
+	.type lj_ff_next, @function
+	.size lj_ff_next, 100
+lj_ff_next:
+	.long 0x280b0008,0x806e0004,0x808e0000,0x41801008
+	.long 0x7d0e5a14,0x92e80004,0x2c03fff4,0x820efffc
+	.long 0x40820ff4,0xf9d20010,0x7e439378,0xf9d20018
+	.long 0x38ae0008,0x9201015c
+	bl lj_tab_next
+	.long 0x28030000,0x38a0ffff,0x41820484,0xc80e0008
+	.long 0x3a8efff8,0xc82e0010,0xd8140000,0x39800018
+	.long 0xd8340008,0x4800047c
+
+	.globl lj_ff_pairs
+	.hidden lj_ff_pairs
+	.type lj_ff_pairs, @function
+	.size lj_ff_pairs, 52
+lj_ff_pairs:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800fa4
+	.long 0x2c05fff4,0x820efffc,0x40820f98,0xc80a0020
+	.long 0x3a8efff8,0x92ee000c,0x39800020,0xd8140000
+	.long 0x48000448
+
+	.globl lj_ff_ipairs_aux
+	.hidden lj_ff_ipairs_aux
+	.type lj_ff_ipairs_aux, @function
+	.size lj_ff_ipairs_aux, 160
+lj_ff_ipairs_aux:
+	.long 0x280b0010,0x80ae0004,0x806e0000,0x80ce000c
+	.long 0x812e0008,0x41800f68,0x2c05fff4,0x7c86b040
+	.long 0x820efffc,0x40820f58,0x40860f54,0x80030018
+	.long 0x81030008,0x39290001,0x3a8efff8,0x7c004840
+	.long 0x92d40004,0x55261838,0x91340000,0x40810024
+	.long 0x7c0834ee,0x81280004,0x2c09ffff,0x39800008
+	.long 0x418203e4,0x39800018,0xd8140008,0x480003d8
+	.long 0x8003001c,0x28000000,0x39800008,0x418203c8
+	.long 0x7d244b78
+	bl lj_tab_getinth
+	.long 0x28030000,0x39800008,0x418203b4,0x81230004
+	.long 0xc8030000,0x4bffffbc
+
+	.globl lj_ff_ipairs
+	.hidden lj_ff_ipairs
+	.type lj_ff_ipairs, @function
+	.size lj_ff_ipairs, 56
+lj_ff_ipairs:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800ed0
+	.long 0x2c05fff4,0x820efffc,0x40820ec4,0xc80a0020
+	.long 0x3a8efff8,0x92ce000c,0x930e0008,0x39800020
+	.long 0xd8140000,0x48000370
+
+	.globl lj_ff_pcall
+	.hidden lj_ff_pcall
+	.type lj_ff_pcall, @function
+	.size lj_ff_pcall, 36
+lj_ff_pcall:
+	.long 0x280b0008,0x88d1fedd,0x41800e9c,0x7dc97378
+	.long 0x39ce0008,0x54c6e7fe,0x396bfff8,0x3a06000e
+	.long 0x4bfff638
+
+	.globl lj_ff_xpcall
+	.hidden lj_ff_xpcall
+	.type lj_ff_xpcall, @function
+	.size lj_ff_xpcall, 64
+lj_ff_xpcall:
+	.long 0x280b0010,0x80ce000c,0xc84e0008,0xc82e0000
+	.long 0x41800e70,0x8911fedd,0x7dc97378,0x2c06fff7
+	.long 0x40820e60,0x39ce0010,0x5508e7fe,0xd8490000
+	.long 0x396bfff0,0xd8290008,0x3a080016,0x4bfff5f8
+
+	.globl lj_ff_coroutine_resume
+	.hidden lj_ff_coroutine_resume
+	.type lj_ff_coroutine_resume, @function
+	.size lj_ff_coroutine_resume, 348
+lj_ff_coroutine_resume:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800e34
+	.long 0x2c05fff9,0x40820e2c,0x88030007,0xe9030030
+	.long 0xe8830018,0x28000001,0xe9230010,0x28880000
+	.long 0x80030020,0x7f844840,0x820efffc,0x4f013342
+	.long 0x7d245a14,0x4f3e1102,0x7c890040,0x4f18cb82
+	.long 0x9201015c,0x4f182b82,0xf9d20010,0x41980de4
+	.long 0x39ce0008,0x396bfff8,0x3929fff8,0xf9230018
+	.long 0x39000000,0xf9d20018,0x7c085800,0x7c0e44ae
+	.long 0x41820010,0x7c0445ae,0x39080008,0x4bffffec
+	.long 0x38a00000,0x7c751b78,0x38c00000,0x4bfff235
+	.long 0xe9350010,0x28030001,0xe8d50018,0x3800ffff
+	.long 0xe9d20010,0x9251ff58,0x9011feb8,0x41810064
+	.long 0x7d893050,0x80120020,0x280c0000,0x7d0e6214
+	.long 0x4182002c,0x7c080040,0x39000000,0x4181006c
+	.long 0x38ccfff8,0xf9350018,0x7c083040,0x7c0944ae
+	.long 0x7c0e45ae,0x39080008,0x4082fff0,0x72000003
+	.long 0x3900fffd,0x3a8efff8,0x910efffc,0x398c0010
+	.long 0x9201015c,0x7d936378,0x4182e9a4,0x4bffef68
+	.long 0x72000003,0x38c6fff8,0x3900fffe,0xc8060000
+	.long 0xf8d50018,0x39800018,0x910efffc,0x3a8efff8
+	.long 0xd80e0000,0x4bffffcc,0x7e439378,0x5584e8fe
+	bl lj_state_growstack
+	.long 0x38600000,0x4bffff48
+
+	.globl lj_ff_coroutine_wrap_aux
+	.hidden lj_ff_coroutine_wrap_aux
+	.type lj_ff_coroutine_wrap_aux, @function
+	.size lj_ff_coroutine_wrap_aux, 280
+lj_ff_coroutine_wrap_aux:
+	.long 0x806a0020,0x88030007,0xe9030030,0xe8830018
+	.long 0x28000001,0xe9230010,0x28880000,0x80030020
+	.long 0x7f844840,0x820efffc,0x4f013342,0x7d245a14
+	.long 0x4f3e1102,0x7c890040,0x4f18cb82,0x9201015c
+	.long 0x4f182b82,0xf9d20010,0x41980c9c,0xf9230018
+	.long 0x39000000,0xf9d20018,0x7c085800,0x7c0e44ae
+	.long 0x41820010,0x7c0445ae,0x39080008,0x4bffffec
+	.long 0x38a00000,0x7c751b78,0x38c00000,0x4bfff0f9
+	.long 0xe9350010,0x28030001,0xe8d50018,0x3800ffff
+	.long 0xe9d20010,0x9251ff58,0x9011feb8,0x4181005c
+	.long 0x7d893050,0x80120020,0x280c0000,0x7d0e6214
+	.long 0x4182002c,0x7c080040,0x39000000,0x41810048
+	.long 0x38ccfff8,0xf9350018,0x7c083040,0x7c0944ae
+	.long 0x7c0e45ae,0x39080008,0x4082fff0,0x72000003
+	.long 0x7dd47378,0x398c0008,0x9201015c,0x7d936378
+	.long 0x4182e870,0x4bffee34,0x7e439378,0x7ea4ab78
+	bl lj_ffh_coroutine_wrap_err
+	.long 0x7e439378,0x5584e8fe
+	bl lj_state_growstack
+	.long 0x38600000,0x4bffff6c
+
+	.globl lj_ff_coroutine_yield
+	.hidden lj_ff_coroutine_yield
+	.type lj_ff_coroutine_yield, @function
+	.size lj_ff_coroutine_yield, 40
+lj_ff_coroutine_yield:
+	.long 0xe8120030,0x7d0e5a14,0xf9d20010,0x70000001
+	.long 0xf9120018,0x38600001,0x41820bb4,0xfb120030
+	.long 0x98720007,0x4bffee4c
+
+	.globl lj_ff_math_abs
+	.hidden lj_ff_math_abs
+	.type lj_ff_math_abs, @function
+	.size lj_ff_math_abs, 48
+lj_ff_math_abs:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800b98
+	.long 0x7c05b040,0x4082003c,0x7c68fe70,0x7d091a78
+	.long 0x3c008000,0x7c684850,0x7c030040,0x41820018
+
+	.globl lj_fff_resi
+	.hidden lj_fff_resi
+	.type lj_fff_resi, @function
+	.size lj_fff_resi, 40
+lj_fff_resi:
+	.long 0x820efffc,0x3a8efff8,0x92cefffc,0x906efff8
+	.long 0x48000028,0x3ca041e0,0x38600000,0x4800000c
+	.long 0x40800b54,0x54a5007e
+
+	.globl lj_fff_restv
+	.hidden lj_fff_restv
+	.type lj_fff_restv, @function
+	.size lj_fff_restv, 16
+lj_fff_restv:
+	.long 0x820efffc,0x90aefffc,0x3a8efff8,0x906efff8
+
+	.globl lj_fff_res1
+	.hidden lj_fff_res1
+	.type lj_fff_res1, @function
+	.size lj_fff_res1, 4
+lj_fff_res1:
+	.long 0x39800010
+
+	.globl lj_fff_res
+	.hidden lj_fff_res
+	.type lj_fff_res, @function
+	.size lj_fff_res, 96
+lj_fff_res:
+	.long 0x72000003,0x7d936378,0x40a2ed74,0x80f0fffc
+	.long 0x54ea5d78,0x7c0a6040,0x54e0dd78,0x41810034
+	.long 0x80f00000,0x3a100004,0x7dc0a050,0x3b2e0004
+	.long 0x54e81d78,0x7c11402a,0x7c0903a6,0x54ea5d78
+	.long 0x54ec9b78,0x54f4dd78,0x54eb9d78,0x4e800420
+	.long 0x390cfffc,0x398c0008,0x7ef4412e,0x4bffffb8
+
+	.globl lj_ff_math_floor
+	.hidden lj_ff_math_floor
+	.type lj_ff_math_floor, @function
+	.size lj_ff_math_floor, 192
+lj_ff_math_floor:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800acc
+	.long 0x7c05b040,0x41a2ff78,0x54a9657e,0x40800abc
+	.long 0x3529fc01,0x2889001f,0x2009001f,0x4180004c
+	.long 0x54a85828,0x54665d7e,0x65088000,0x39290001
+	.long 0x7d083378,0x54645828,0x4084004c,0x7d064830
+	.long 0x7d0c0430,0x7cc62378,0x7ca9fe70,0x7cc84838
+	.long 0x3008ffff,0x7d004110,0x7c6c4214,0x7c634a78
+	.long 0x7c691850,0x4bfffef0,0x54a9083c,0x7ca8fe70
+	.long 0x7c694b78,0x7d284038,0x21280000,0x7c631910
+	.long 0x4bfffed4,0x6d088000,0x7ca9fe70,0x7d082378
+	.long 0x7d084b39,0x4c423202,0x3c608000,0x41a2feb8
+	.long 0xc82e0000
+	bl floor
+	.long 0x60000000,0x480009dc
+
+	.globl lj_ff_math_ceil
+	.hidden lj_ff_math_ceil
+	.type lj_ff_math_ceil, @function
+	.size lj_ff_math_ceil, 204
+lj_ff_math_ceil:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800a0c
+	.long 0x7c05b040,0x41a2feb8,0x54a9657e,0x408009fc
+	.long 0x3529fc01,0x2889001f,0x2009001f,0x4180005c
+	.long 0x54a85828,0x54665d7e,0x65088000,0x39290001
+	.long 0x7d083378,0x54645828,0x4084005c,0x7d064830
+	.long 0x7d0c0430,0x7cc62378,0x7ca9fe70,0x7cc84878
+	.long 0x3008ffff,0x7d004110,0x7c6c4214,0x7c036000
+	.long 0x7c634a78,0x7c691850,0x4080fe2c,0x3ca041e0
+	.long 0x38600000,0x4bfffe48,0x54a9083c,0x7ca8fe70
+	.long 0x7c694b78,0x7d284078,0x3128ffff,0x7c694110
+	.long 0x4bfffe04,0x6d088000,0x7ca9fe70,0x7d084b39
+	.long 0x4c423202,0x3c608000,0x41a2fdec,0xc82e0000
+	bl ceil
+	.long 0x60000000,0x48000910
+
+	.globl lj_ff_math_sqrt
+	.hidden lj_ff_math_sqrt
+	.type lj_ff_math_sqrt, @function
+	.size lj_ff_math_sqrt, 32
+lj_ff_math_sqrt:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x41800940
+	.long 0x7c05b040,0x40800938,0xfc20082c,0x480008f0
+
+	.globl lj_ff_math_log
+	.hidden lj_ff_math_log
+	.type lj_ff_math_log, @function
+	.size lj_ff_math_log, 36
+lj_ff_math_log:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x40820920
+	.long 0x7c05b040,0x40800918
+	bl log
+	.long 0x60000000,0x480008cc
+
+	.globl lj_ff_math_log10
+	.hidden lj_ff_math_log10
+	.type lj_ff_math_log10, @function
+	.size lj_ff_math_log10, 36
+lj_ff_math_log10:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x418008fc
+	.long 0x7c05b040,0x408008f4
+	bl log10
+	.long 0x60000000,0x480008a8
+
+	.globl lj_ff_math_exp
+	.hidden lj_ff_math_exp
+	.type lj_ff_math_exp, @function
+	.size lj_ff_math_exp, 36
+lj_ff_math_exp:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x418008d8
+	.long 0x7c05b040,0x408008d0
+	bl exp
+	.long 0x60000000,0x48000884
+
+	.globl lj_ff_math_sin
+	.hidden lj_ff_math_sin
+	.type lj_ff_math_sin, @function
+	.size lj_ff_math_sin, 36
+lj_ff_math_sin:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x418008b4
+	.long 0x7c05b040,0x408008ac
+	bl sin
+	.long 0x60000000,0x48000860
+
+	.globl lj_ff_math_cos
+	.hidden lj_ff_math_cos
+	.type lj_ff_math_cos, @function
+	.size lj_ff_math_cos, 36
+lj_ff_math_cos:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x41800890
+	.long 0x7c05b040,0x40800888
+	bl cos
+	.long 0x60000000,0x4800083c
+
+	.globl lj_ff_math_tan
+	.hidden lj_ff_math_tan
+	.type lj_ff_math_tan, @function
+	.size lj_ff_math_tan, 36
+lj_ff_math_tan:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x4180086c
+	.long 0x7c05b040,0x40800864
+	bl tan
+	.long 0x60000000,0x48000818
+
+	.globl lj_ff_math_asin
+	.hidden lj_ff_math_asin
+	.type lj_ff_math_asin, @function
+	.size lj_ff_math_asin, 36
+lj_ff_math_asin:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x41800848
+	.long 0x7c05b040,0x40800840
+	bl asin
+	.long 0x60000000,0x480007f4
+
+	.globl lj_ff_math_acos
+	.hidden lj_ff_math_acos
+	.type lj_ff_math_acos, @function
+	.size lj_ff_math_acos, 36
+lj_ff_math_acos:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x41800824
+	.long 0x7c05b040,0x4080081c
+	bl acos
+	.long 0x60000000,0x480007d0
+
+	.globl lj_ff_math_atan
+	.hidden lj_ff_math_atan
+	.type lj_ff_math_atan, @function
+	.size lj_ff_math_atan, 36
+lj_ff_math_atan:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x41800800
+	.long 0x7c05b040,0x408007f8
+	bl atan
+	.long 0x60000000,0x480007ac
+
+	.globl lj_ff_math_sinh
+	.hidden lj_ff_math_sinh
+	.type lj_ff_math_sinh, @function
+	.size lj_ff_math_sinh, 36
+lj_ff_math_sinh:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x418007dc
+	.long 0x7c05b040,0x408007d4
+	bl sinh
+	.long 0x60000000,0x48000788
+
+	.globl lj_ff_math_cosh
+	.hidden lj_ff_math_cosh
+	.type lj_ff_math_cosh, @function
+	.size lj_ff_math_cosh, 36
+lj_ff_math_cosh:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x418007b8
+	.long 0x7c05b040,0x408007b0
+	bl cosh
+	.long 0x60000000,0x48000764
+
+	.globl lj_ff_math_tanh
+	.hidden lj_ff_math_tanh
+	.type lj_ff_math_tanh, @function
+	.size lj_ff_math_tanh, 36
+lj_ff_math_tanh:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x41800794
+	.long 0x7c05b040,0x4080078c
+	bl tanh
+	.long 0x60000000,0x48000740
+
+	.globl lj_ff_math_pow
+	.hidden lj_ff_math_pow
+	.type lj_ff_math_pow, @function
+	.size lj_ff_math_pow, 52
+lj_ff_math_pow:
+	.long 0x280b0010,0x80ae0004,0xc82e0000,0x80ce000c
+	.long 0xc84e0008,0x41800768,0x7c05b040,0x40800760
+	.long 0x7c06b040,0x40800758
+	bl pow
+	.long 0x60000000,0x4800070c
+
+	.globl lj_ff_math_atan2
+	.hidden lj_ff_math_atan2
+	.type lj_ff_math_atan2, @function
+	.size lj_ff_math_atan2, 52
+lj_ff_math_atan2:
+	.long 0x280b0010,0x80ae0004,0xc82e0000,0x80ce000c
+	.long 0xc84e0008,0x41800734,0x7c05b040,0x4080072c
+	.long 0x7c06b040,0x40800724
+	bl atan2
+	.long 0x60000000,0x480006d8
+
+	.globl lj_ff_math_fmod
+	.hidden lj_ff_math_fmod
+	.type lj_ff_math_fmod, @function
+	.size lj_ff_math_fmod, 52
+lj_ff_math_fmod:
+	.long 0x280b0010,0x80ae0004,0xc82e0000,0x80ce000c
+	.long 0xc84e0008,0x41800700,0x7c05b040,0x408006f8
+	.long 0x7c06b040,0x408006f0
+	bl fmod
+	.long 0x60000000,0x480006a4
+
+	.globl lj_ff_math_ldexp
+	.hidden lj_ff_math_ldexp
+	.type lj_ff_math_ldexp, @function
+	.size lj_ff_math_ldexp, 52
+lj_ff_math_ldexp:
+	.long 0x280b0010,0x80ae0004,0xc82e0000,0x80ce000c
+	.long 0x808e0008,0x418006cc,0x7c05b040,0x408006c4
+	.long 0x7c06b040,0x408206bc
+	bl ldexp
+	.long 0x60000000,0x48000670
+
+	.globl lj_ff_math_frexp
+	.hidden lj_ff_math_frexp
+	.type lj_ff_math_frexp, @function
+	.size lj_ff_math_frexp, 68
+lj_ff_math_frexp:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x418006a0
+	.long 0x7c05b040,0x40800698,0x3891fef0,0x820efffc
+	bl frexp
+	.long 0x60000000,0x8111fef0,0x3a8efff8,0xd8340000
+	.long 0x39800018,0x92d4000c,0x91140008,0x4bfffb34
+
+	.globl lj_ff_math_modf
+	.hidden lj_ff_math_modf
+	.type lj_ff_math_modf, @function
+	.size lj_ff_math_modf, 56
+lj_ff_math_modf:
+	.long 0x280b0008,0x80ae0004,0xc82e0000,0x4180065c
+	.long 0x7c05b040,0x40800654,0x388efff8,0x820efffc
+	bl modf
+	.long 0x60000000,0x3a8efff8,0xd82e0000,0x39800018
+	.long 0x4bfffafc
+
+	.globl lj_ff_math_min
+	.hidden lj_ff_math_min
+	.type lj_ff_math_min, @function
+	.size lj_ff_math_min, 196
+lj_ff_math_min:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800624
+	.long 0x7c05b040,0x390e0008,0x7d2e5a14,0x4082005c
+	.long 0x80c80004,0x7c884840,0x80880000,0x4084fa90
+	.long 0x7c06b040,0x6c608000,0x6c868000,0x40820020
+	.long 0x7cc60010,0x7c000110,0x7cc60038,0x7c662214
+	.long 0x78630020,0x39080008,0x4bffffc8,0x408005d4
+	.long 0x6c638000,0x90610020,0xc8210020,0xfc21f828
+	.long 0xc8480000,0x48000024,0xc82e0000,0x408005b4
+	.long 0x80c80004,0x7c884840,0xc8480000,0x40840564
+	.long 0x7c06b040,0x40800014,0xfc011028,0x39080008
+	.long 0xfc2008ae,0x4bffffdc,0x80880000,0x40820584
+	.long 0x6c848000,0x90810020,0xc8410020,0xfc42f828
+	.long 0x4bffffd8
+
+	.globl lj_ff_math_max
+	.hidden lj_ff_math_max
+	.type lj_ff_math_max, @function
+	.size lj_ff_math_max, 196
+lj_ff_math_max:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800560
+	.long 0x7c05b040,0x390e0008,0x7d2e5a14,0x4082005c
+	.long 0x80c80004,0x7c884840,0x80880000,0x4084f9cc
+	.long 0x7c06b040,0x6c608000,0x6c868000,0x40820020
+	.long 0x7cc60010,0x7c000110,0x7cc60078,0x7c662214
+	.long 0x78630020,0x39080008,0x4bffffc8,0x40800510
+	.long 0x6c638000,0x90610020,0xc8210020,0xfc21f828
+	.long 0xc8480000,0x48000024,0xc82e0000,0x408004f0
+	.long 0x80c80004,0x7c884840,0xc8480000,0x408404a0
+	.long 0x7c06b040,0x40800014,0xfc011028,0x39080008
+	.long 0xfc20106e,0x4bffffdc,0x80880000,0x408204c0
+	.long 0x6c848000,0x90810020,0xc8410020,0xfc42f828
+	.long 0x4bffffd8
+
+	.globl lj_ff_string_byte
+	.hidden lj_ff_string_byte
+	.type lj_ff_string_byte, @function
+	.size lj_ff_string_byte, 56
+lj_ff_string_byte:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x4082049c
+	.long 0x2c05fffb,0x40820494,0x8003000c,0x88630010
+	.long 0x39800008,0x820efffc,0x28000000,0x3a8efff8
+	.long 0x41a2f940,0x4bfff900
+
+	.globl lj_ff_string_char
+	.hidden lj_ff_string_char
+	.type lj_ff_string_char, @function
+	.size lj_ff_string_char, 56
+lj_ff_string_char:
+	.long 0x8011fe80,0x8111fe84,0x7c004040,0x4080051d
+	.long 0x280b0008,0x80ae0004,0x800e0000,0x40820454
+	.long 0x7c05b040,0x4082044c,0x388e0000,0x38a00001
+	.long 0x280000ff,0x4181043c
+
+	.globl lj_fff_newstr
+	.hidden lj_fff_newstr
+	.type lj_fff_newstr, @function
+	.size lj_fff_newstr, 16
+lj_fff_newstr:
+	.long 0x7e439378,0xf9d20010,0x9201015c
+	bl lj_str_new
+
+	.globl lj_fff_resstr
+	.hidden lj_fff_resstr
+	.type lj_fff_resstr, @function
+	.size lj_fff_resstr, 12
+lj_fff_resstr:
+	.long 0xe9d20010,0x38a0fffb,0x4bfff8d4
+
+	.globl lj_ff_string_sub
+	.hidden lj_ff_string_sub
+	.type lj_ff_string_sub, @function
+	.size lj_ff_string_sub, 196
+lj_ff_string_sub:
+	.long 0x8011fe80,0x8111fe84,0x7c004040,0x408004c9
+	.long 0x280b0010,0x80ae0014,0x800e0004,0x806e0000
+	.long 0x418003fc,0x808e000c,0x810e0008,0x3920ffff
+	.long 0x41820010,0x7c05b040,0x812e0010,0x408203e0
+	.long 0x7c04b040,0x408203d8,0x2c00fffb,0x408203d0
+	.long 0x8003000c,0x7c004840,0x38c90001,0x41800034
+	.long 0x2c080000,0x7cc80214,0x4081003c,0x7ca84850
+	.long 0x3883000f,0x7ca0fe70,0x38a50001,0x7c844214
+	.long 0x7ca50078,0x78840020,0x78a50020,0x4bffff58
+	.long 0x7c004800,0x7d203214,0x4080ffc8,0x7c090378
+	.long 0x4bffffc0,0x7d0807b4,0x30a8ffff,0x7ca52910
+	.long 0x7cc4fe70,0x7cc62878,0x7cc82078,0x39080001
+	.long 0x4bffffac
+
+	.globl lj_ff_string_reverse
+	.hidden lj_ff_string_reverse
+	.type lj_ff_string_reverse, @function
+	.size lj_ff_string_reverse, 76
+lj_ff_string_reverse:
+	.long 0x8011fe80,0x8111fe84,0x7c004040,0x40800405
+	.long 0x280b0008,0x80ae0004,0x808e0000,0x4180033c
+	.long 0x2c05fffb,0x3871febc,0x40820330,0x80030008
+	.long 0x9243000c,0xf9d20010,0x9201015c,0x90030000
+	bl lj_buf_putstr_reverse
+	bl lj_buf_tostr
+	.long 0x4bfffee8
+
+	.globl lj_ff_string_lower
+	.hidden lj_ff_string_lower
+	.type lj_ff_string_lower, @function
+	.size lj_ff_string_lower, 76
+lj_ff_string_lower:
+	.long 0x8011fe80,0x8111fe84,0x7c004040,0x408003b9
+	.long 0x280b0008,0x80ae0004,0x808e0000,0x418002f0
+	.long 0x2c05fffb,0x3871febc,0x408202e4,0x80030008
+	.long 0x9243000c,0xf9d20010,0x9201015c,0x90030000
+	bl lj_buf_putstr_lower
+	bl lj_buf_tostr
+	.long 0x4bfffe9c
+
+	.globl lj_ff_string_upper
+	.hidden lj_ff_string_upper
+	.type lj_ff_string_upper, @function
+	.size lj_ff_string_upper, 76
+lj_ff_string_upper:
+	.long 0x8011fe80,0x8111fe84,0x7c004040,0x4080036d
+	.long 0x280b0008,0x80ae0004,0x808e0000,0x418002a4
+	.long 0x2c05fffb,0x3871febc,0x40820298,0x80030008
+	.long 0x9243000c,0xf9d20010,0x9201015c,0x90030000
+	bl lj_buf_putstr_upper
+	bl lj_buf_tostr
+	.long 0x4bfffe50
+
+	.globl lj_ff_bit_band
+	.hidden lj_ff_bit_band
+	.type lj_ff_bit_band, @function
+	.size lj_ff_bit_band, 68
+lj_ff_bit_band:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800268
+	.long 0x7c05b040,0x40820231,0x390e0008,0x7d2e5a14
+	.long 0x80c80004,0x7c884840,0x80880000,0x40a4f6d4
+	.long 0x7c06b040,0x40820229,0x7c632038,0x39080008
+	.long 0x4bffffe0
+
+	.globl lj_ff_bit_bor
+	.hidden lj_ff_bit_bor
+	.type lj_ff_bit_bor, @function
+	.size lj_ff_bit_bor, 68
+lj_ff_bit_bor:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800224
+	.long 0x7c05b040,0x408201ed,0x390e0008,0x7d2e5a14
+	.long 0x80c80004,0x7c884840,0x80880000,0x40a4f690
+	.long 0x7c06b040,0x408201e5,0x7c632378,0x39080008
+	.long 0x4bffffe0
+
+	.globl lj_ff_bit_bxor
+	.hidden lj_ff_bit_bxor
+	.type lj_ff_bit_bxor, @function
+	.size lj_ff_bit_bxor, 68
+lj_ff_bit_bxor:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x418001e0
+	.long 0x7c05b040,0x408201a9,0x390e0008,0x7d2e5a14
+	.long 0x80c80004,0x7c884840,0x80880000,0x40a4f64c
+	.long 0x7c06b040,0x408201a1,0x7c632278,0x39080008
+	.long 0x4bffffe0
+
+	.globl lj_ff_bit_bswap
+	.hidden lj_ff_bit_bswap
+	.type lj_ff_bit_bswap, @function
+	.size lj_ff_bit_bswap, 44
+lj_ff_bit_bswap:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x4180019c
+	.long 0x7c05b040,0x40820165,0x5460403e,0x5060c00e
+	.long 0x5060c42e,0x7c030378,0x4bfff60c
+
+	.globl lj_ff_bit_bnot
+	.hidden lj_ff_bit_bnot
+	.type lj_ff_bit_bnot, @function
+	.size lj_ff_bit_bnot, 32
+lj_ff_bit_bnot:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800170
+	.long 0x7c05b040,0x40820139,0x7c6318f8,0x4bfff5ec
+
+	.globl lj_ff_bit_lshift
+	.hidden lj_ff_bit_lshift
+	.type lj_ff_bit_lshift, @function
+	.size lj_ff_bit_lshift, 52
+lj_ff_bit_lshift:
+	.long 0x280b0010,0x80ae0004,0x80ce000c,0x806e0000
+	.long 0x808e0008,0x41800148,0x7c05b040,0x40820111
+	.long 0x7c06b040,0x40820138,0x548406fe,0x7c632030
+	.long 0x4bfff5b8
+
+	.globl lj_ff_bit_rshift
+	.hidden lj_ff_bit_rshift
+	.type lj_ff_bit_rshift, @function
+	.size lj_ff_bit_rshift, 52
+lj_ff_bit_rshift:
+	.long 0x280b0010,0x80ae0004,0x80ce000c,0x806e0000
+	.long 0x808e0008,0x41800114,0x7c05b040,0x408200dd
+	.long 0x7c06b040,0x40820104,0x548406fe,0x7c632430
+	.long 0x4bfff584
+
+	.globl lj_ff_bit_arshift
+	.hidden lj_ff_bit_arshift
+	.type lj_ff_bit_arshift, @function
+	.size lj_ff_bit_arshift, 52
+lj_ff_bit_arshift:
+	.long 0x280b0010,0x80ae0004,0x80ce000c,0x806e0000
+	.long 0x808e0008,0x418000e0,0x7c05b040,0x408200a9
+	.long 0x7c06b040,0x408200d0,0x548406fe,0x7c632630
+	.long 0x4bfff550
+
+	.globl lj_ff_bit_rol
+	.hidden lj_ff_bit_rol
+	.type lj_ff_bit_rol, @function
+	.size lj_ff_bit_rol, 48
+lj_ff_bit_rol:
+	.long 0x280b0010,0x80ae0004,0x80ce000c,0x806e0000
+	.long 0x808e0008,0x418000ac,0x7c05b040,0x40820075
+	.long 0x7c06b040,0x4082009c,0x5c63203e,0x4bfff520
+
+	.globl lj_ff_bit_ror
+	.hidden lj_ff_bit_ror
+	.type lj_ff_bit_ror, @function
+	.size lj_ff_bit_ror, 52
+lj_ff_bit_ror:
+	.long 0x280b0010,0x80ae0004,0x80ce000c,0x806e0000
+	.long 0x808e0008,0x4180007c,0x7c05b040,0x40820045
+	.long 0x7c06b040,0x4082006c,0x7c8400d0,0x5c63203e
+	.long 0x4bfff4ec
+
+	.globl lj_ff_bit_tobit
+	.hidden lj_ff_bit_tobit
+	.type lj_ff_bit_tobit, @function
+	.size lj_ff_bit_tobit, 28
+lj_ff_bit_tobit:
+	.long 0x280b0008,0x80ae0004,0x806e0000,0x41800050
+	.long 0x7c05b040,0x40820019,0x4bfff4d0
+
+	.globl lj_fff_resn
+	.hidden lj_fff_resn
+	.type lj_fff_resn, @function
+	.size lj_fff_resn, 16
+lj_fff_resn:
+	.long 0x820efffc,0x3a8efff8,0xd82efff8,0x4bfff4f8
+
+	.globl lj_fff_tobit_fb
+	.hidden lj_fff_tobit_fb
+	.type lj_fff_tobit_fb, @function
+	.size lj_fff_tobit_fb, 24
+lj_fff_tobit_fb:
+	.long 0xc82e0000,0x4181002c,0xfc21f02a,0xd8210028
+	.long 0x80610028,0x4e800020
+
+	.globl lj_fff_bitop_fb
+	.hidden lj_fff_bitop_fb
+	.type lj_fff_bitop_fb, @function
+	.size lj_fff_bitop_fb, 24
+lj_fff_bitop_fb:
+	.long 0xc8280000,0x41810014,0xfc21f02a,0xd8210028
+	.long 0x80810028,0x4e800020
+
+	.globl lj_fff_fallback
+	.hidden lj_fff_fallback
+	.type lj_fff_fallback, @function
+	.size lj_fff_fallback, 132
+lj_fff_fallback:
+	.long 0xe98a0018,0x7d0e5a14,0x820efffc,0x380800a0
+	.long 0x81320020,0x9201015c,0x7c004840,0xf9d20010
+	.long 0xf9120018,0x7e439378,0x4181007c,0x7d8903a6
+	.long 0x4e800421,0xe8410018,0xe9d20010,0x2c030000
+	.long 0x546c1838,0x3a8efff8,0x4181f480,0xe8120018
+	.long 0x814efff8,0x7d6e0050,0x4082002c,0x3b2e0004
+	.long 0x820a0010,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x54f4dd78,0x7c11402a,0x7e947214,0x7c0903a6
+	.long 0x4e800420
+
+	.globl lj_vm_call_tail
+	.hidden lj_vm_call_tail
+	.type lj_vm_call_tail, @function
+	.size lj_vm_call_tail, 52
+lj_vm_call_tail:
+	.long 0x72000003,0x56080038,0x40820010,0x80f0fffc
+	.long 0x54e8dd78,0x39080008,0x7d287050,0x4bffe714
+	.long 0x38800014
+	bl lj_state_growstack
+	.long 0xe9d20010,0x7c000000,0x4bffff98
+
+	.globl lj_fff_gcstep
+	.hidden lj_fff_gcstep
+	.type lj_fff_gcstep, @function
+	.size lj_fff_gcstep, 52
+lj_fff_gcstep:
+	.long 0x7ea802a6,0xf9d20010,0x7c0e5a14,0x9201015c
+	.long 0xf8120018,0x7e439378
+	bl lj_gc_step
+	.long 0xe9d20010,0x7ea803a6,0xe8120018,0x7d6e0050
+	.long 0x814efff8,0x4e800020
+
+	.globl lj_vm_record
+	.hidden lj_vm_record
+	.type lj_vm_record, @function
+	.size lj_vm_record, 0
+lj_vm_record:
+
+	.globl lj_vm_rethook
+	.hidden lj_vm_rethook
+	.type lj_vm_rethook, @function
+	.size lj_vm_rethook, 28
+lj_vm_rethook:
+	.long 0x88d1fedd,0x70c00010,0x41820040,0x390804d0
+	.long 0x7c11402a,0x7c0903a6,0x4e800420
+
+	.globl lj_vm_inshook
+	.hidden lj_vm_inshook
+	.type lj_vm_inshook, @function
+	.size lj_vm_inshook, 112
+lj_vm_inshook:
+	.long 0x88d1fedd,0x8131ff30,0x70c00010,0x54c0efc0
+	.long 0x4082ffe0,0x2c800000,0x3529ffff,0x4186ffd4
+	.long 0x9131ff30,0x41820008,0x4084ffc8,0x7e439378
+	.long 0x92610158,0x7e048378,0xf9d20010
+	bl lj_dispatch_ins
+	.long 0xe9d20010,0x3b2e0004,0x80f0fffc,0x54e81d78
+	.long 0x54ea5d78,0x390804d0,0x54ec9b78,0x7c11402a
+	.long 0x54f4dd78,0x54eb9d78,0x7c0903a6,0x4e800420
+
+	.globl lj_cont_hook
+	.hidden lj_cont_hook
+	.type lj_cont_hook, @function
+	.size lj_cont_hook, 12
+lj_cont_hook:
+	.long 0x3a100004,0x826affe8,0x4bffffcc
+
+	.globl lj_vm_hotloop
+	.hidden lj_vm_hotloop
+	.type lj_vm_hotloop, @function
+	.size lj_vm_hotloop, 0
+lj_vm_hotloop:
+
+	.globl lj_vm_callhook
+	.hidden lj_vm_callhook
+	.type lj_vm_callhook, @function
+	.size lj_vm_callhook, 4
+lj_vm_callhook:
+	.long 0x7e048378
+
+	.globl lj_vm_hotcall
+	.hidden lj_vm_hotcall
+	.type lj_vm_hotcall, @function
+	.size lj_vm_hotcall, 68
+lj_vm_hotcall:
+	.long 0x7c0e5a14,0x9201015c,0x7e439378,0xf9d20010
+	.long 0x7e8ea050,0xf8120018
+	bl lj_dispatch_call
+	.long 0xe9d20010,0xe8120018,0x9301015c,0x3b2e0004
+	.long 0x7d6e0050,0x7e8ea214,0x814efff8,0x80f0fffc
+	.long 0x7c6903a6,0x4e800420
+
+	.globl lj_cont_stitch
+	.hidden lj_cont_stitch
+	.type lj_cont_stitch, @function
+	.size lj_cont_stitch, 0
+lj_cont_stitch:
+
+	.globl lj_vm_profhook
+	.hidden lj_vm_profhook
+	.type lj_vm_profhook, @function
+	.size lj_vm_profhook, 36
+lj_vm_profhook:
+	.long 0x7e439378,0x92610158,0x7e048378,0xf9d20010
+	bl lj_dispatch_profile
+	.long 0xe9d20010,0x3a10fffc,0x3b2e0004,0x4bffe99c
+
+	.globl lj_vm_exit_handler
+	.hidden lj_vm_exit_handler
+	.type lj_vm_exit_handler, @function
+	.size lj_vm_exit_handler, 0
+lj_vm_exit_handler:
+
+	.globl lj_vm_exit_interp
+	.hidden lj_vm_exit_interp
+	.type lj_vm_exit_interp, @function
+	.size lj_vm_exit_interp, 0
+lj_vm_exit_interp:
+
+	.globl lj_vm_modi
+	.hidden lj_vm_modi
+	.type lj_vm_modi, @function
+	.size lj_vm_modi, 72
+lj_vm_modi:
+	.long 0x39000000,0x7d0103a6,0x7c0327d7,0x41830028
+	.long 0x7c652278,0x2c050000,0x7c0021d6,0x7c601850
+	.long 0x4c800020,0x2c030000,0x4d820020,0x7c632214
+	.long 0x4e800020,0x2c040000,0x38600000,0x4d820020
+	.long 0x4c631982,0x4e800020
+
+	.globl lj_vm_cachesync
+	.hidden lj_vm_cachesync
+	.type lj_vm_cachesync, @function
+	.size lj_vm_cachesync, 68
+lj_vm_cachesync:
+	.long 0x786306a4,0x7c832050,0x3884001f,0x7884d943
+	.long 0x4d820020,0x7c8903a6,0x7c651b78,0x7c00186c
+	.long 0x38630020,0x4200fff8,0x7c0004ac,0x7c8903a6
+	.long 0x7c002fac,0x38a50020,0x4200fff8,0x4c00012c
+	.long 0x4e800020
+
+	.globl lj_vm_ffi_callback
+	.hidden lj_vm_ffi_callback
+	.type lj_vm_ffi_callback, @function
+	.size lj_vm_ffi_callback, 416
+lj_vm_ffi_callback:
+	.long 0x558cf5be
+	addis 2,2,.TOC.-lj_vm_ffi_callback@ha
+	addi 2,2,.TOC.-lj_vm_ffi_callback@l
+	.long 0xf821fe91,0xf9c10030,0xd9c100c0,0xf9e10038
+	.long 0xd9e100c8,0xfa010040,0xda0100d0,0x7c0802a6
+	.long 0xfa210048,0xda2100d8,0xfa410050,0xda4100e0
+	.long 0xfa610058,0xda6100e8,0xfa810060,0xda8100f0
+	.long 0xfaa10068,0xdaa100f8,0xfac10070,0xdac10100
+	.long 0xf8010180,0xfae10078,0xdae10108,0xfb010080
+	.long 0xdb010110,0xfb210088,0xdb210118,0x7c000026
+	.long 0xfb410090,0xdb410120,0xfb610098,0xdb610128
+	.long 0xfb8100a0,0xdb810130,0xfba100a8,0xdba10138
+	.long 0xfbc100b0,0xdbc10140,0xfbe100b8,0xdbe10148
+	.long 0xf8010178,0xf8410018,0x820b0100,0x3a2b01a0
+	.long 0x91900100,0xf87000a0,0xd8300030,0xf89000a8
+	.long 0xd8500038,0xf8b000b0,0xd8700040,0xf8d000b8
+	.long 0xd8900048,0xf8f000c0,0xd8b00050,0xf91000c8
+	.long 0xd8d00058,0xf93000d0,0xd8f00060,0xf95000d8
+	.long 0xd9100068,0xd9300070,0xd9500078,0xd9700080
+	.long 0xd9900088,0xd9b00090,0x380101d0,0xf81000e0
+	.long 0x7e038378,0x9201015c,0x7c240b78
+	bl lj_ccallback_enter
+	.long 0xe9c30010,0x3ec0fffe,0x62d6ffff,0xe9630018
+	.long 0x3cc059c0,0x3b000000,0x7c721b78,0x90c10028
+	.long 0x3c004338,0x814efff8,0x60c60004,0x90010024
+	.long 0x3ae0ffff,0x3800ffff,0xc3c10028,0x90c10028
+	.long 0x7d6e5850,0x9011feb8,0xc3e10028,0x3b2e0004
+	.long 0x820a0010,0x80f00000,0x3a100004,0x54e81d78
+	.long 0x54f4dd78,0x7c11402a,0x7e947214,0x7c0903a6
+	.long 0x4e800420
+
+	.globl lj_cont_ffi_callback
+	.hidden lj_cont_ffi_callback
+	.type lj_cont_ffi_callback, @function
+	.size lj_cont_ffi_callback, 72
+lj_cont_ffi_callback:
+	.long 0x8211ff60,0xf9d20010,0xf9520018,0xfa500010
+	.long 0x7e038378,0x7e84a378
+	bl lj_ccallback_leave
+	.long 0xe87000a0,0xc8300030,0xe89000a8,0xc8500038
+	.long 0xc8700040,0xc8900048,0xc8b00050,0xc8d00058
+	.long 0xc8f00060,0xc9100068,0x4bffde44
+
+	.globl lj_vm_ffi_call
+	.hidden lj_vm_ffi_call
+	.type lj_vm_ffi_call, @function
+	.size lj_vm_ffi_call, 272
+lj_vm_ffi_call:
+	.long 0x81030008,0x7c0802a6,0x8883000c,0x88a3000e
+	.long 0x7d0800d0,0xf8010010,0x2c850000,0x7c290b78
+	.long 0x3484ffff,0x7c21416a,0x4cc63042,0xf9c9fff8
+	.long 0xf869fff0,0x7d2e4b78,0x390300b8,0x78841f24
+	.long 0x41a00018,0x39210060,0x7c08202a,0x7c09212a
+	.long 0x3484fff8,0x4080fff4,0x40a60038,0xc8230010
+	.long 0xc8430018,0xc8630020,0xc8830028,0xc8a30030
+	.long 0xc8c30038,0xc8e30040,0xc9030048,0xc9230050
+	.long 0xc9430058,0xc9630060,0xc9830068,0xc9a30070
+	.long 0xf8410018,0xe9830000,0xe8830080,0xe8a30088
+	.long 0xe8c30090,0xe8e30098,0x7d8903a6,0xe90300a0
+	.long 0xe92300a8,0xe94300b0,0xe8630078,0x4e800421
+	.long 0xe8410018,0xe90efff0,0xe92efff8,0xe80e0010
+	.long 0xf8680078,0xd8280010,0xf8880080,0xd8480018
+	.long 0xd8680020,0xd8880028,0xd8a80030,0xd8c80038
+	.long 0xd8e80040,0xd9080048,0x7c0803a6,0xf8a80088
+	.long 0x7dc17378,0xf8c80090,0x7d2e4b78,0x4e800020
+
+	.section .note.GNU-stack,"",@progbits
+	.gnu_attribute 4, 1
+	.ident "DynASM 1.4.0"
+
+	.section .debug_frame,"",@progbits
+.Lframe0:
+	.long .LECIE0-.LSCIE0
+.LSCIE0:
+	.long 0xffffffff
+	.byte 0x1
+	.string ""
+	.uleb128 0x1
+	.sleb128 -8
+	.byte 65
+	.byte 0xc
+	.uleb128 1
+	.uleb128 0
+	.align 2
+.LECIE0:
+
+.LSFDE0:
+	.long .LEFDE0-.LASFDE0
+.LASFDE0:
+	.long .Lframe0
+	.long .Lbegin
+	.long 18716
+	.byte 0xe
+	.uleb128 368
+	.byte 0x11
+	.uleb128 65
+	.sleb128 -2
+	.byte 0x11
+	.uleb128 70
+	.sleb128 -1
+	.byte 142
+	.uleb128 36
+	.byte 174
+	.uleb128 18
+	.byte 143
+	.uleb128 35
+	.byte 175
+	.uleb128 17
+	.byte 144
+	.uleb128 34
+	.byte 176
+	.uleb128 16
+	.byte 145
+	.uleb128 33
+	.byte 177
+	.uleb128 15
+	.byte 146
+	.uleb128 32
+	.byte 178
+	.uleb128 14
+	.byte 147
+	.uleb128 31
+	.byte 179
+	.uleb128 13
+	.byte 148
+	.uleb128 30
+	.byte 180
+	.uleb128 12
+	.byte 149
+	.uleb128 29
+	.byte 181
+	.uleb128 11
+	.byte 150
+	.uleb128 28
+	.byte 182
+	.uleb128 10
+	.byte 151
+	.uleb128 27
+	.byte 183
+	.uleb128 9
+	.byte 152
+	.uleb128 26
+	.byte 184
+	.uleb128 8
+	.byte 153
+	.uleb128 25
+	.byte 185
+	.uleb128 7
+	.byte 154
+	.uleb128 24
+	.byte 186
+	.uleb128 6
+	.byte 155
+	.uleb128 23
+	.byte 187
+	.uleb128 5
+	.byte 156
+	.uleb128 22
+	.byte 188
+	.uleb128 4
+	.byte 157
+	.uleb128 21
+	.byte 189
+	.uleb128 3
+	.byte 158
+	.uleb128 20
+	.byte 190
+	.uleb128 2
+	.byte 159
+	.uleb128 19
+	.byte 191
+	.uleb128 1
+	.align 2
+.LEFDE0:
+
+.LSFDE1:
+	.long .LEFDE1-.LASFDE1
+.LASFDE1:
+	.long .Lframe0
+	.long lj_vm_ffi_call
+	.long 272
+	.byte 0x11
+	.uleb128 65
+	.sleb128 -2
+	.byte 0x8e
+	.uleb128 1
+	.byte 0xd
+	.uleb128 0xe
+	.align 2
+.LEFDE1:
+
+	.section .eh_frame,"a",@progbits
+.Lframe1:
+	.long .LECIE1-.LSCIE1
+.LSCIE1:
+	.long 0
+	.byte 0x1
+	.string "zPR"
+	.uleb128 0x1
+	.sleb128 -8
+	.byte 65
+	.uleb128 6
+	.byte 0x1b
+	.long lj_err_unwind_dwarf-.
+	.byte 0x1b
+	.byte 0xc
+	.uleb128 1
+	.uleb128 0
+	.align 2
+.LECIE1:
+
+.LSFDE2:
+	.long .LEFDE2-.LASFDE2
+.LASFDE2:
+	.long .LASFDE2-.Lframe1
+	.long .Lbegin-.
+	.long 18716
+	.uleb128 0
+	.byte 0xe
+	.uleb128 368
+	.byte 0x11
+	.uleb128 65
+	.sleb128 -2
+	.byte 0x11
+	.uleb128 70
+	.sleb128 -1
+	.byte 142
+	.uleb128 36
+	.byte 174
+	.uleb128 18
+	.byte 143
+	.uleb128 35
+	.byte 175
+	.uleb128 17
+	.byte 144
+	.uleb128 34
+	.byte 176
+	.uleb128 16
+	.byte 145
+	.uleb128 33
+	.byte 177
+	.uleb128 15
+	.byte 146
+	.uleb128 32
+	.byte 178
+	.uleb128 14
+	.byte 147
+	.uleb128 31
+	.byte 179
+	.uleb128 13
+	.byte 148
+	.uleb128 30
+	.byte 180
+	.uleb128 12
+	.byte 149
+	.uleb128 29
+	.byte 181
+	.uleb128 11
+	.byte 150
+	.uleb128 28
+	.byte 182
+	.uleb128 10
+	.byte 151
+	.uleb128 27
+	.byte 183
+	.uleb128 9
+	.byte 152
+	.uleb128 26
+	.byte 184
+	.uleb128 8
+	.byte 153
+	.uleb128 25
+	.byte 185
+	.uleb128 7
+	.byte 154
+	.uleb128 24
+	.byte 186
+	.uleb128 6
+	.byte 155
+	.uleb128 23
+	.byte 187
+	.uleb128 5
+	.byte 156
+	.uleb128 22
+	.byte 188
+	.uleb128 4
+	.byte 157
+	.uleb128 21
+	.byte 189
+	.uleb128 3
+	.byte 158
+	.uleb128 20
+	.byte 190
+	.uleb128 2
+	.byte 159
+	.uleb128 19
+	.byte 191
+	.uleb128 1
+	.align 2
+.LEFDE2:
+
+.Lframe2:
+	.long .LECIE2-.LSCIE2
+.LSCIE2:
+	.long 0
+	.byte 0x1
+	.string "zR"
+	.uleb128 0x1
+	.sleb128 -4
+	.byte 65
+	.uleb128 1
+	.byte 0x1b
+	.byte 0xc
+	.uleb128 1
+	.uleb128 0
+	.align 2
+.LECIE2:
+
+.LSFDE3:
+	.long .LEFDE3-.LASFDE3
+.LASFDE3:
+	.long .LASFDE3-.Lframe2
+	.long lj_vm_ffi_call-.
+	.long 272
+	.uleb128 0
+	.byte 0x11
+	.uleb128 65
+	.sleb128 -2
+	.byte 0x8e
+	.uleb128 1
+	.byte 0xd
+	.uleb128 0xe
+	.align 2
+.LEFDE3:
+
